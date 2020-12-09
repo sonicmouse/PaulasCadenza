@@ -37,7 +37,7 @@
 			this.TSMIAddAccount = new System.Windows.Forms.ToolStripMenuItem();
 			this.TSMIRemoveAccount = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStripMain = new System.Windows.Forms.StatusStrip();
-			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.TSStatusMain = new System.Windows.Forms.ToolStripStatusLabel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.tabControl2 = new System.Windows.Forms.TabControl();
 			this.TabPageAccounts = new System.Windows.Forms.TabPage();
@@ -46,12 +46,12 @@
 			this.LstViewAccounts = new PaulasCadenza.BaseUI.Controls.ListViewDoubleBuffered();
 			this.CHEmail = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.CHHotel = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.CHStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.CHName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ImgListMain = new System.Windows.Forms.ImageList(this.components);
 			this.TabCtrlMain = new System.Windows.Forms.TabControl();
 			this.TabPageRoomSearch = new System.Windows.Forms.TabPage();
-			this.PageCtrlRoomSearch = new PaulasCadenza.UI.Pages.PageCtrlRoomSearch();
 			this.TabPageRoomActions = new System.Windows.Forms.TabPage();
+			this.PageCtrlRoomSearch = new PaulasCadenza.UI.Pages.PageCtrlRoomSearch();
 			this.PageCtrlRoomActions = new PaulasCadenza.UI.Pages.PageCtrlRoomActions();
 			this.MenuStripMain.SuspendLayout();
 			this.StatusStripMain.SuspendLayout();
@@ -73,7 +73,7 @@
             this.TSMIAccounts});
 			this.MenuStripMain.Location = new System.Drawing.Point(0, 0);
 			this.MenuStripMain.Name = "MenuStripMain";
-			this.MenuStripMain.Size = new System.Drawing.Size(553, 24);
+			this.MenuStripMain.Size = new System.Drawing.Size(524, 24);
 			this.MenuStripMain.TabIndex = 0;
 			this.MenuStripMain.Text = "menuStrip1";
 			// 
@@ -118,18 +118,18 @@
 			// StatusStripMain
 			// 
 			this.StatusStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.TSStatusMain});
 			this.StatusStripMain.Location = new System.Drawing.Point(0, 432);
 			this.StatusStripMain.Name = "StatusStripMain";
-			this.StatusStripMain.Size = new System.Drawing.Size(553, 22);
+			this.StatusStripMain.Size = new System.Drawing.Size(524, 22);
 			this.StatusStripMain.TabIndex = 1;
 			this.StatusStripMain.Text = "statusStrip1";
 			// 
-			// toolStripStatusLabel1
+			// TSStatusMain
 			// 
-			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+			this.TSStatusMain.Name = "TSStatusMain";
+			this.TSStatusMain.Size = new System.Drawing.Size(57, 17);
+			this.TSStatusMain.Text = "Welcome";
 			// 
 			// splitContainer1
 			// 
@@ -148,7 +148,7 @@
 			// 
 			this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
 			this.splitContainer1.Panel2.Controls.Add(this.TabCtrlMain);
-			this.splitContainer1.Size = new System.Drawing.Size(553, 408);
+			this.splitContainer1.Size = new System.Drawing.Size(524, 408);
 			this.splitContainer1.SplitterDistance = 181;
 			this.splitContainer1.SplitterWidth = 5;
 			this.splitContainer1.TabIndex = 2;
@@ -162,7 +162,7 @@
 			this.tabControl2.Location = new System.Drawing.Point(3, 3);
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
-			this.tabControl2.Size = new System.Drawing.Size(546, 175);
+			this.tabControl2.Size = new System.Drawing.Size(517, 175);
 			this.tabControl2.TabIndex = 4;
 			// 
 			// TabPageAccounts
@@ -173,7 +173,7 @@
 			this.TabPageAccounts.Location = new System.Drawing.Point(4, 24);
 			this.TabPageAccounts.Name = "TabPageAccounts";
 			this.TabPageAccounts.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageAccounts.Size = new System.Drawing.Size(538, 147);
+			this.TabPageAccounts.Size = new System.Drawing.Size(509, 147);
 			this.TabPageAccounts.TabIndex = 0;
 			this.TabPageAccounts.Text = "Accounts";
 			this.TabPageAccounts.UseVisualStyleBackColor = true;
@@ -181,7 +181,7 @@
 			// BtnDisconnect
 			// 
 			this.BtnDisconnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnDisconnect.Location = new System.Drawing.Point(499, 41);
+			this.BtnDisconnect.Location = new System.Drawing.Point(470, 41);
 			this.BtnDisconnect.Name = "BtnDisconnect";
 			this.BtnDisconnect.Size = new System.Drawing.Size(33, 29);
 			this.BtnDisconnect.TabIndex = 2;
@@ -192,7 +192,7 @@
 			// BtnConnect
 			// 
 			this.BtnConnect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.BtnConnect.Location = new System.Drawing.Point(499, 6);
+			this.BtnConnect.Location = new System.Drawing.Point(470, 6);
 			this.BtnConnect.Name = "BtnConnect";
 			this.BtnConnect.Size = new System.Drawing.Size(33, 29);
 			this.BtnConnect.TabIndex = 1;
@@ -209,7 +209,7 @@
 			this.LstViewAccounts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CHEmail,
             this.CHHotel,
-            this.CHStatus});
+            this.CHName});
 			this.LstViewAccounts.FullRowSelect = true;
 			this.LstViewAccounts.HideSelection = false;
 			this.LstViewAccounts.LabelWrap = false;
@@ -217,7 +217,7 @@
 			this.LstViewAccounts.MultiSelect = false;
 			this.LstViewAccounts.Name = "LstViewAccounts";
 			this.LstViewAccounts.ShowItemToolTips = true;
-			this.LstViewAccounts.Size = new System.Drawing.Size(490, 141);
+			this.LstViewAccounts.Size = new System.Drawing.Size(461, 139);
 			this.LstViewAccounts.SmallImageList = this.ImgListMain;
 			this.LstViewAccounts.TabIndex = 0;
 			this.LstViewAccounts.UseCompatibleStateImageBehavior = false;
@@ -233,9 +233,9 @@
 			// 
 			this.CHHotel.Text = "Hotel";
 			// 
-			// CHStatus
+			// CHName
 			// 
-			this.CHStatus.Text = "Status";
+			this.CHName.Text = "Name";
 			// 
 			// ImgListMain
 			// 
@@ -254,7 +254,7 @@
 			this.TabCtrlMain.Location = new System.Drawing.Point(3, 3);
 			this.TabCtrlMain.Name = "TabCtrlMain";
 			this.TabCtrlMain.SelectedIndex = 0;
-			this.TabCtrlMain.Size = new System.Drawing.Size(546, 206);
+			this.TabCtrlMain.Size = new System.Drawing.Size(517, 203);
 			this.TabCtrlMain.TabIndex = 4;
 			// 
 			// TabPageRoomSearch
@@ -263,10 +263,20 @@
 			this.TabPageRoomSearch.Location = new System.Drawing.Point(4, 24);
 			this.TabPageRoomSearch.Name = "TabPageRoomSearch";
 			this.TabPageRoomSearch.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageRoomSearch.Size = new System.Drawing.Size(538, 178);
+			this.TabPageRoomSearch.Size = new System.Drawing.Size(509, 175);
 			this.TabPageRoomSearch.TabIndex = 0;
 			this.TabPageRoomSearch.Text = "Room Search";
 			this.TabPageRoomSearch.UseVisualStyleBackColor = true;
+			// 
+			// TabPageRoomActions
+			// 
+			this.TabPageRoomActions.Controls.Add(this.PageCtrlRoomActions);
+			this.TabPageRoomActions.Location = new System.Drawing.Point(4, 24);
+			this.TabPageRoomActions.Name = "TabPageRoomActions";
+			this.TabPageRoomActions.Size = new System.Drawing.Size(509, 175);
+			this.TabPageRoomActions.TabIndex = 1;
+			this.TabPageRoomActions.Text = "Room Actions";
+			this.TabPageRoomActions.UseVisualStyleBackColor = true;
 			// 
 			// PageCtrlRoomSearch
 			// 
@@ -275,18 +285,8 @@
 			this.PageCtrlRoomSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomSearch.Location = new System.Drawing.Point(3, 3);
 			this.PageCtrlRoomSearch.Name = "PageCtrlRoomSearch";
-			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(532, 172);
+			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(503, 169);
 			this.PageCtrlRoomSearch.TabIndex = 0;
-			// 
-			// TabPageRoomActions
-			// 
-			this.TabPageRoomActions.Controls.Add(this.PageCtrlRoomActions);
-			this.TabPageRoomActions.Location = new System.Drawing.Point(4, 24);
-			this.TabPageRoomActions.Name = "TabPageRoomActions";
-			this.TabPageRoomActions.Size = new System.Drawing.Size(538, 178);
-			this.TabPageRoomActions.TabIndex = 1;
-			this.TabPageRoomActions.Text = "Room Actions";
-			this.TabPageRoomActions.UseVisualStyleBackColor = true;
 			// 
 			// PageCtrlRoomActions
 			// 
@@ -295,14 +295,14 @@
 			this.PageCtrlRoomActions.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomActions.Location = new System.Drawing.Point(0, 0);
 			this.PageCtrlRoomActions.Name = "PageCtrlRoomActions";
-			this.PageCtrlRoomActions.Size = new System.Drawing.Size(538, 178);
+			this.PageCtrlRoomActions.Size = new System.Drawing.Size(509, 177);
 			this.PageCtrlRoomActions.TabIndex = 0;
 			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(553, 454);
+			this.ClientSize = new System.Drawing.Size(524, 454);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.StatusStripMain);
 			this.Controls.Add(this.MenuStripMain);
@@ -336,14 +336,14 @@
 		private System.Windows.Forms.MenuStrip MenuStripMain;
 		private System.Windows.Forms.ToolStripMenuItem TSMIAccounts;
 		private System.Windows.Forms.StatusStrip StatusStripMain;
-		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+		private System.Windows.Forms.ToolStripStatusLabel TSStatusMain;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.TabControl tabControl2;
 		private System.Windows.Forms.TabPage TabPageAccounts;
 		private BaseUI.Controls.ListViewDoubleBuffered LstViewAccounts;
 		private System.Windows.Forms.ColumnHeader CHEmail;
 		private System.Windows.Forms.ColumnHeader CHHotel;
-		private System.Windows.Forms.ColumnHeader CHStatus;
+		private System.Windows.Forms.ColumnHeader CHName;
 		private System.Windows.Forms.TabControl TabCtrlMain;
 		private System.Windows.Forms.TabPage TabPageRoomSearch;
 		private System.Windows.Forms.ToolStripMenuItem TSMIFile;

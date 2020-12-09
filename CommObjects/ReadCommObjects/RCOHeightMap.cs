@@ -24,17 +24,20 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 			}
 		}
 
-		private static readonly int UNKNOWN_FLAG = 0x4000;
-		private const int HEIGHT_MASK = 0x3FFF;
+		private const int UnknownFlag = 0x4000;
+		private const int HeightMask = 0x3FFF;
+		private const double HeightDivisor = 256.0;
+
+		public const double MaxHeight = HeightMask / HeightDivisor;
 
 		private static double ConvertTileValueToHeight(int value)
 		{
-			return (value < 0) ? -1.0 : ((value & HEIGHT_MASK) / 256.0);
+			return (value < 0) ? -1.0 : ((value & HeightMask) / HeightDivisor);
 		}
 
 		private static bool IsUnknownFlag(int k)
 		{
-			return (k & UNKNOWN_FLAG) == k;
+			return (k & UnknownFlag) == k;
 		}
 
 		private static bool IsValidTileValue(int k)

@@ -13,6 +13,7 @@ namespace PaulasCadenza.UI.Forms
 		{
 			NetworkCommPublisher.Interface.Disconnected += OnBotDisconnected;
 			NetworkCommPublisher.Interface.Authenticated += OnBotAuthenticated;
+			NetworkCommPublisher.Interface.NetworkCommReadObjectReceived += OnNetworkCommReadObjectReceived;
 
 			InitializeComponent();
 			UpdateAccountList();
@@ -20,14 +21,37 @@ namespace PaulasCadenza.UI.Forms
 			LstViewAccounts.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
+		private void SenderAsListViewItem(object sender, Action<ListViewItem> act)
+		{
+			Invoke(new Action(() =>
+			{
+				foreach (var i in LstViewAccounts.Items.Cast<ListViewItem>())
+				{
+					if (i.Tag is AccountModel acct && acct.Equals(sender as AccountModel))
+					{
+						act(i);
+					}
+				}
+			}));
+		}
+
 		private void OnBotAuthenticated(object sender, EventArgs e)
 		{
-			//
+			SenderAsListViewItem(sender, i => i.ImageIndex = 0);
 		}
 
 		private void OnBotDisconnected(object sender, EventArgs e)
 		{
-			//
+			SenderAsListViewItem(sender, i => { i.ImageIndex = 1; i.Checked = false; });
+		}
+
+		private void OnNetworkCommReadObjectReceived(object sender, NetworkCommPublisher.NetworkCommEventEventArgs e)
+		{
+			if (e.CommReadObject is CommObjects.ReadCommObjects.RCOIdentity identity)
+			{
+				SenderAsListViewItem(sender, i => i.SubItems[2] =
+					new ListViewItem.ListViewSubItem { Text = identity.Name });
+			}
 		}
 
 		private void LstViewAccounts_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -50,13 +74,14 @@ namespace PaulasCadenza.UI.Forms
 					if (lstItem == null)
 					{
 						lstItem = new ListViewItem(acct.Email) { Tag = acct, ImageIndex = 1 };
-						lstItem.SubItems.Add(acct.Hotel.ToString());
+						lstItem.SubItems.Add(acct.Hotel.Host);
+						lstItem.SubItems.Add("<unknown>");
 						LstViewAccounts.Items.Add(lstItem);
 					}
 					else
 					{
 						lstItem.Text = acct.Email;
-						lstItem.SubItems[1].Text = acct.Hotel.ToString();
+						lstItem.SubItems[1].Text = acct.Hotel.Host;
 						lstItem.Tag = acct;
 					}
 				}

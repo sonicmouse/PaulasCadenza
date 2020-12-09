@@ -91,6 +91,7 @@
     <Compile Include="CommObjects\ReadCommObjects\RCOEnteredRoom.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOFloorHeightMap.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOHeightMap.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCOIdentity.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOInitHandshake.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCONavigatorMetaData.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOPing.cs" />
@@ -98,17 +99,27 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOAnswerHandshake.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOAuthAcknowledge.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOAuthenticate.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOAvatar.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOBeginHandshake.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOClientFingerprint.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOClientVars.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCODance.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCODropCarryItem.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOGesture.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOGotoRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOHello.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOHoldSign.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOLeaveRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORequestRoomCategories.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORoomSubscribe.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOSearchRooms.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOShout.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOSit.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOTalk.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOTalkBubble.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOTrackEventLog.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOPong.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOWalk.cs" />
     <Compile Include="Data\Accounts.cs" />
     <Compile Include="Data\CEFSettings.cs" />
     <Compile Include="Data\FigureData.cs" />
@@ -121,6 +132,12 @@
     <Compile Include="Models\FlashVarsModel.cs" />
     <Compile Include="Models\SearchedRoomModel.cs" />
     <Compile Include="NetworkCommPublisher.cs" />
+    <Compile Include="UI\Controls\CtrlFloor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CtrlFloor.Designer.cs">
+      <DependentUpon>CtrlFloor.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Forms\FormAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +179,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Controls\CtrlFloor.resx">
+      <DependentUpon>CtrlFloor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormAccount.resx">
       <DependentUpon>FormAccount.cs</DependentUpon>
     </EmbeddedResource>
