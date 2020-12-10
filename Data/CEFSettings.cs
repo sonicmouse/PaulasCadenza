@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CefSharp;
+using CefSharp.WinForms;
+using System;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Linq;
 
 namespace PaulasCadenza.Data
 {
@@ -26,6 +28,26 @@ namespace PaulasCadenza.Data
 				return new DirectoryInfo(Path.Combine(
 					GlobalCacheDirectory.FullName, "users", hash));
 			}
+		}
+
+		public static void SetupGlobalSettings()
+		{
+			Cef.EnableHighDPISupport();
+
+			var settings = new CefSettings
+			{
+				CachePath = GlobalCacheDirectory.FullName
+			};
+
+			settings.CefCommandLineArgs.Add("enable-npapi", "1");
+			settings.CefCommandLineArgs.Add("enable-system-flash", "1");
+
+			Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
+		}
+
+		public static void TeardownGlobalSettings()
+		{
+			Cef.Shutdown();
 		}
 	}
 }

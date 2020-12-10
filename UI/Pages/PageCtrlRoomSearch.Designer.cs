@@ -33,6 +33,7 @@
 			this.CmbSearchFilter = new System.Windows.Forms.ComboBox();
 			this.CmbSearchType = new System.Windows.Forms.ComboBox();
 			this.BtnLeaveRoom = new System.Windows.Forms.Button();
+			this.BtnEnter = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// LstRooms
@@ -80,24 +81,36 @@
 			// BtnLeaveRoom
 			// 
 			this.BtnLeaveRoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.BtnLeaveRoom.Location = new System.Drawing.Point(3, 228);
+			this.BtnLeaveRoom.Location = new System.Drawing.Point(84, 228);
 			this.BtnLeaveRoom.Name = "BtnLeaveRoom";
 			this.BtnLeaveRoom.Size = new System.Drawing.Size(75, 23);
-			this.BtnLeaveRoom.TabIndex = 4;
+			this.BtnLeaveRoom.TabIndex = 5;
 			this.BtnLeaveRoom.Text = "&Leave";
 			this.BtnLeaveRoom.UseVisualStyleBackColor = true;
 			this.BtnLeaveRoom.Click += new System.EventHandler(this.BtnLeaveRoom_Click);
 			// 
-			// PageCtrlRoom
+			// BtnEnter
+			// 
+			this.BtnEnter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.BtnEnter.Location = new System.Drawing.Point(3, 228);
+			this.BtnEnter.Name = "BtnEnter";
+			this.BtnEnter.Size = new System.Drawing.Size(75, 23);
+			this.BtnEnter.TabIndex = 4;
+			this.BtnEnter.Text = "&Enter";
+			this.BtnEnter.UseVisualStyleBackColor = true;
+			this.BtnEnter.Click += new System.EventHandler(this.BtnEnter_Click);
+			// 
+			// PageCtrlRoomSearch
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.BtnEnter);
 			this.Controls.Add(this.BtnLeaveRoom);
 			this.Controls.Add(this.CmbSearchType);
 			this.Controls.Add(this.CmbSearchFilter);
 			this.Controls.Add(this.TxtSearch);
 			this.Controls.Add(this.LstRooms);
-			this.Name = "PageCtrlRoom";
+			this.Name = "PageCtrlRoomSearch";
 			this.Size = new System.Drawing.Size(496, 254);
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -111,5 +124,6 @@
 		private System.Windows.Forms.ComboBox CmbSearchFilter;
 		private System.Windows.Forms.ComboBox CmbSearchType;
 		private System.Windows.Forms.Button BtnLeaveRoom;
+		private System.Windows.Forms.Button BtnEnter;
 	}
 }

@@ -1,10 +1,5 @@
 ﻿using PaulasCadenza.HabboNetwork;
 using PaulasCadenza.HabboNetwork.IO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
@@ -16,7 +11,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 			_on = on;
 		}
 
-		public override ushort SendType => (ushort)(_on ? 3199 : 1497);
+		public override ushort SendType => (ushort)(_on ? 1840 : 3308);
 
 		public override void Serialize(CommWriter writer) { }
 	}

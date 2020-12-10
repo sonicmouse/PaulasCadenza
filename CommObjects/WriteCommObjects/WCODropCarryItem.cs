@@ -5,7 +5,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
 	public sealed class WCODropCarryItem : CommWriteObject
 	{
-		public override ushort SendType => 2353;
+		public override ushort SendType => 3002;
 
 		public override void Serialize(CommWriter writer)
 		{

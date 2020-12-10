@@ -12,7 +12,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 			_ssoTicket = ssoTicket;
 		}
 
-		public override ushort SendType => 2571;
+		public override ushort SendType => 3719;
 
 		public override void Serialize(CommWriter writer)
 		{

@@ -95,7 +95,12 @@
     <Compile Include="CommObjects\ReadCommObjects\RCOInitHandshake.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCONavigatorMetaData.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOPing.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCORoomUserDetailsUpdate.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCORoomUserLeave.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCORoomUsers.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCORoomUsersUpdate.cs" />
     <Compile Include="CommObjects\ReadCommObjects\RCOSearchRoomsResult.cs" />
+    <Compile Include="CommObjects\ReadCommObjects\RCOSelfAvatarUpdated.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOAnswerHandshake.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOAuthAcknowledge.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOAuthenticate.cs" />
@@ -108,7 +113,7 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOGesture.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOGotoRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOHello.cs" />
-    <Compile Include="CommObjects\WriteCommObjects\WCOHoldSign.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOShowSign.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOLeaveRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORequestRoomCategories.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORoomSubscribe.cs" />
@@ -125,11 +130,15 @@
     <Compile Include="Data\FigureData.cs" />
     <Compile Include="Data\RC4Encryption.cs" />
     <Compile Include="Data\Resources.cs" />
+    <Compile Include="Data\RoomUsers.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CadenzaBotModel.cs" />
     <Compile Include="Models\FigureDataHotLooksModel.cs" />
     <Compile Include="Models\FigureDataModel.cs" />
     <Compile Include="Models\FlashVarsModel.cs" />
+    <Compile Include="Models\HabboUser.cs" />
+    <Compile Include="Models\RoomUserDetails.cs" />
+    <Compile Include="Models\RoomUserUpdate.cs" />
     <Compile Include="Models\SearchedRoomModel.cs" />
     <Compile Include="NetworkCommPublisher.cs" />
     <Compile Include="UI\Controls\CtrlFloor.cs">
@@ -137,6 +146,12 @@
     </Compile>
     <Compile Include="UI\Controls\CtrlFloor.Designer.cs">
       <DependentUpon>CtrlFloor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\CtrlRoomUsers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\CtrlRoomUsers.Designer.cs">
+      <DependentUpon>CtrlRoomUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FormAccount.cs">
       <SubType>Form</SubType>
@@ -181,6 +196,9 @@
     </Compile>
     <EmbeddedResource Include="UI\Controls\CtrlFloor.resx">
       <DependentUpon>CtrlFloor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\CtrlRoomUsers.resx">
+      <DependentUpon>CtrlRoomUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormAccount.resx">
       <DependentUpon>FormAccount.cs</DependentUpon>

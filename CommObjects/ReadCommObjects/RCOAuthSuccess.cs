@@ -5,7 +5,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
 	public sealed class RCOAuthSuccess : CommReadObject
 	{
-		public override ushort SendType => 2434;
+		public override ushort SendType => 882;
 
 		public override void Deserialize(CommReader reader) { }
 	}

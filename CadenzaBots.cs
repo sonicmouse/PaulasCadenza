@@ -76,6 +76,11 @@ namespace PaulasCadenza
 			}
 		}
 
+		public RoomUsers GetRoomUsers(AccountModel acct)
+		{
+			return _bots[acct].Bot.RoomUsers;
+		}
+
 		public enum WriteType
 		{
 			All,
@@ -119,7 +124,7 @@ namespace PaulasCadenza
 		{
 			foreach(var bot in GetBotSet(type))
 			{
-				bot.Comm.WriteCommObjectsAsync(new WCOHoldSign(value.GetValueOrDefault(PRNG.Instance.Next(18))));
+				bot.Comm.WriteCommObjectsAsync(new WCOShowSign(value.GetValueOrDefault(PRNG.Instance.Next(18))));
 			}
 		}
 
@@ -226,8 +231,7 @@ namespace PaulasCadenza
 
 		private void OnCommReceivedUnknownObject(object sender, ReceivedUnknownObjectEventArgs e)
 		{
-			Console.WriteLine($"UNKNOWN OBJECT ({e.SendType}):");
-			Console.WriteLine(e.HexDump);
+			Console.WriteLine($"UNKNOWN OBJECT ({e.SendType}):\n{e.HexDump}");
 		}
 
 		private void OnCommSentCommObject(object sender, SentCommObjectEventArgs e)

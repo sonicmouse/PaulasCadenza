@@ -9,6 +9,8 @@ namespace PaulasCadenza.UI.Forms
 {
 	public partial class FormMain : FormCadenza
 	{
+		private const string UnknownName = "<unknown>";
+
 		public FormMain()
 		{
 			NetworkCommPublisher.Interface.Disconnected += OnBotDisconnected;
@@ -42,7 +44,13 @@ namespace PaulasCadenza.UI.Forms
 
 		private void OnBotDisconnected(object sender, EventArgs e)
 		{
-			SenderAsListViewItem(sender, i => { i.ImageIndex = 1; i.Checked = false; });
+			SenderAsListViewItem(sender, i =>
+			{
+				i.ImageIndex = 1;
+				i.Checked = false;
+				i.SubItems[2] =
+					new ListViewItem.ListViewSubItem { Text = UnknownName };
+			});
 		}
 
 		private void OnNetworkCommReadObjectReceived(object sender, NetworkCommPublisher.NetworkCommEventEventArgs e)
@@ -75,7 +83,7 @@ namespace PaulasCadenza.UI.Forms
 					{
 						lstItem = new ListViewItem(acct.Email) { Tag = acct, ImageIndex = 1 };
 						lstItem.SubItems.Add(acct.Hotel.Host);
-						lstItem.SubItems.Add("<unknown>");
+						lstItem.SubItems.Add(UnknownName);
 						LstViewAccounts.Items.Add(lstItem);
 					}
 					else
@@ -134,7 +142,10 @@ namespace PaulasCadenza.UI.Forms
 			var itm = GetSelectedItem();
 			if ((itm != null) && (itm.Tag is AccountModel acct))
 			{
-				CadenzaBots.Instance.Connect(this, acct, itm.Checked);
+				if(!CadenzaBots.Instance.Connect(this, acct, itm.Checked))
+				{
+					itm.Checked = false;
+				}
 			}
 		}
 

@@ -15,6 +15,7 @@ namespace PaulasCadenza.Models
 		public FigureData Figure { get; }
 		public FlashVarsModel FlashVars { get; }
 		public DHM DHM { get; set; }
+		public RoomUsers RoomUsers { get; private set; } = new RoomUsers();
 
 		public CadenzaBotModel(AccountModel account, FigureData figureData, FlashVarsModel flashVars)
 		{

@@ -1,6 +1,4 @@
-﻿using CefSharp;
-using CefSharp.WinForms;
-using PaulasCadenza.Data;
+﻿using PaulasCadenza.Data;
 using PaulasCadenza.UI.Forms;
 using System;
 using System.Windows.Forms;
@@ -24,16 +22,8 @@ namespace PaulasCadenza
 		[STAThread]
 		static void Main()
 		{
-			Cef.EnableHighDPISupport();
-			var settings = new CefSettings
-			{
-				CachePath = CEFSettings.GlobalCacheDirectory.FullName
-			};
-			settings.CefCommandLineArgs.Add("enable-npapi", "1");
-			settings.CefCommandLineArgs.Add("enable-system-flash", "1");
-			
-			Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
-
+			CEFSettings.SetupGlobalSettings();
+			try
 			{
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
@@ -42,8 +32,10 @@ namespace PaulasCadenza
 					Application.Run(frm);
 				}
 			}
-
-			Cef.Shutdown();
+			finally
+			{
+				CEFSettings.TeardownGlobalSettings();
+			}
 		}
 	}
 }

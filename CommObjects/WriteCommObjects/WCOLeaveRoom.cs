@@ -5,7 +5,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
 	public sealed class WCOLeaveRoom : CommWriteObject
 	{
-		public override ushort SendType => 1406;
+		public override ushort SendType => 803;
 
 		public override void Serialize(CommWriter writer) { }
 	}

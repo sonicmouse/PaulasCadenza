@@ -12,7 +12,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 		public int Height { get; private set; }
 		public int FixedWallsHeight { get; private set; }
 		public double Scale { get; private set; }
-		public override ushort SendType => 2676;
+		public override ushort SendType => 329;
 
 		private List<List<int>> _planes;
 

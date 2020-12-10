@@ -10,7 +10,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 	{
 		public IEnumerable<SearchedRoomModel> Rooms { get; private set; }
 
-		public override ushort SendType => 3311;
+		public override ushort SendType => 3469;
 
 		public override void Deserialize(CommReader reader)
 		{

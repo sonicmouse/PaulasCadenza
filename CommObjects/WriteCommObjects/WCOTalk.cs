@@ -16,7 +16,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 			_unknown = unknown;
 		}
 
-		public override ushort SendType => 2998;
+		public override ushort SendType => 3503;
 
 		public override void Serialize(CommWriter writer)
 		{

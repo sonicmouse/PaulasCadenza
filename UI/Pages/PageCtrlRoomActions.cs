@@ -1,6 +1,7 @@
 ﻿using PaulasCadenza.BaseUI.Controls;
 using PaulasCadenza.CommObjects.ReadCommObjects;
 using PaulasCadenza.CommObjects.WriteCommObjects;
+using PaulasCadenza.UI.Controls;
 using PaulasCadenza.Utilities;
 using System;
 using System.Drawing;
@@ -17,8 +18,14 @@ namespace PaulasCadenza.UI.Pages
 
 			InitializeComponent();
 
-			//CtlFloor.BorderStyle = BorderStyle.None;
 			CtlFloor.TileClicked += OnTileClicked;
+			LstUsers.DoubleClickList += OnDoubleClickList;
+		}
+
+		private void OnDoubleClickList(object sender, CtrlRoomUsers.DoubleClickEventArgs e)
+		{
+			TxtAvatar.Text = e.HabboUser.Figure;
+			ChkAvatarMale.Checked = e.HabboUser.IsMale.GetValueOrDefault();
 		}
 
 		private void OnTileClicked(object sender, Controls.CtrlFloor.TileClickedEventArgs e)
@@ -37,7 +44,7 @@ namespace PaulasCadenza.UI.Pages
 
 		private void TxtTalk_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+			if (e.KeyCode == Keys.Enter)
 			{
 				e.SuppressKeyPress = true;
 				if(ChkShout.Checked)
@@ -56,7 +63,7 @@ namespace PaulasCadenza.UI.Pages
 
 		private void TxtAvatar_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+			if (e.KeyCode == Keys.Enter)
 			{
 				e.SuppressKeyPress = true;
 				if(TxtAvatar.Text.Length > 0)

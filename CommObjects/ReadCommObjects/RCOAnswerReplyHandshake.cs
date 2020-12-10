@@ -8,7 +8,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 		public string AnswerReply { get; private set; }
 		public bool ServerEncrypted { get; private set; }
 
-		public override ushort SendType => 698;
+		public override ushort SendType => 2728;
 
 		public override void Deserialize(CommReader reader)
 		{

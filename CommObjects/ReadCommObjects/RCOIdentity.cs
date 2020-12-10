@@ -11,14 +11,14 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 		public bool IsMale { get; private set; }
 		public string RealName { get; private set; }
 
-		public override ushort SendType => 3116;
+		public override ushort SendType => 1487;
 
 		public override void Deserialize(CommReader reader)
 		{
 			Id = reader.ReadUnsignedInteger();
 			Name = reader.ReadString();
 			Figure = reader.ReadString();
-			IsMale = reader.ReadString() == "M";
+			IsMale = reader.ReadString().ToUpper() == "M";
 			RealName = reader.ReadString();
 
 			_ = reader.ReadString();

@@ -3,15 +3,15 @@ using PaulasCadenza.HabboNetwork.IO;
 
 namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
-	public sealed class RCOEnteredRoom : CommReadObject
+	public sealed class RCORoomUserLeave : CommReadObject
 	{
-		public uint RoomID { get; private set; }
+		public uint UserEntityId { get; private set; }
 
-		public override ushort SendType => 3681;
+		public override ushort SendType => 3455;
 
 		public override void Deserialize(CommReader reader)
 		{
-			RoomID = reader.ReadUnsignedInteger();
+			UserEntityId = uint.Parse(reader.ReadString());
 		}
 	}
 }

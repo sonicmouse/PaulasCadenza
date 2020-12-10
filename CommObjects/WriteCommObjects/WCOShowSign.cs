@@ -3,16 +3,16 @@ using PaulasCadenza.HabboNetwork.IO;
 
 namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
-	public sealed class WCOHoldSign : CommWriteObject
+	public sealed class WCOShowSign : CommWriteObject
 	{
 		private readonly int _sign;
 
-		public WCOHoldSign(int sign)
+		public WCOShowSign(int sign)
 		{
 			_sign = sign;
 		}
 
-		public override ushort SendType => 3164;
+		public override ushort SendType => 1780;
 
 		public override void Serialize(CommWriter writer)
 		{
