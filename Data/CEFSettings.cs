@@ -45,7 +45,7 @@ namespace PaulasCadenza.Data
 			Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
 		}
 
-		public static void TeardownGlobalSettings()
+		public static void TearDownGlobalSettings()
 		{
 			Cef.Shutdown();
 		}

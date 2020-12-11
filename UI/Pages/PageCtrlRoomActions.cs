@@ -37,7 +37,7 @@ namespace PaulasCadenza.UI.Pages
 			var sel = CmbWalkType.SelectedItem as Helpers.Cadence;
 			if(sel != null)
 			{
-				CadenzaBots.Instance.MoveTo(new Point(e.X, e.Y), sel.DeriveOffsets, CadenzaBots.WriteType.Selected);
+				CadenzaBots.Instance.MoveToAsync(new Point(e.X, e.Y), sel.DeriveOffsets, CadenzaBots.WriteType.Selected);
 			}
 		}
 
