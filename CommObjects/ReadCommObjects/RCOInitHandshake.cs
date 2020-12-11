@@ -8,7 +8,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 		public string Left { get; private set; }
 		public string Right { get; private set; }
 
-		public override ushort SendType => 565;
+		public override ushort SendType => 3821;
 
 		public override void Deserialize(CommReader reader)
 		{

@@ -6,7 +6,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
 	public sealed class WCOClientFingerprint : CommWriteObject
 	{
-		public override ushort SendType => 910;
+		public override ushort SendType => 135;
 
 		public override void Serialize(CommWriter writer)
 		{

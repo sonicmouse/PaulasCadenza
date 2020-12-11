@@ -15,7 +15,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 			_externalVariablesText = externalVariablesText;
 		}
 
-		public override ushort SendType => 1981;
+		public override ushort SendType => 2298;
 
 		public override void Serialize(CommWriter writer)
 		{

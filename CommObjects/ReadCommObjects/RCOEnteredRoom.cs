@@ -7,7 +7,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 	{
 		public uint RoomID { get; private set; }
 
-		public override ushort SendType => 97;
+		public override ushort SendType => 3681;
 
 		public override void Deserialize(CommReader reader)
 		{

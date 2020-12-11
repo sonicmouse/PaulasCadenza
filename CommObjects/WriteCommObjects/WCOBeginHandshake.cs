@@ -6,7 +6,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
 	public sealed class WCOBeginHandshake : CommWriteObject, ISendMessageNeverEncrypt
 	{
-		public override ushort SendType => 1590;
+		public override ushort SendType => 1806;
 
 		public override void Serialize(CommWriter writer) { }
 	}

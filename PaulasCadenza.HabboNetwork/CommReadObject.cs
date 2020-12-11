@@ -3,9 +3,8 @@ using System;
 
 namespace PaulasCadenza.HabboNetwork
 {
-	public abstract class CommReadObject : IEquatable<CommReadObject>
+	public abstract class CommReadObject : CommObject, IEquatable<CommReadObject>
 	{
-		public abstract ushort SendType { get; }
 		public abstract void Deserialize(CommReader reader);
 
 		public virtual bool Equals(CommReadObject other) =>

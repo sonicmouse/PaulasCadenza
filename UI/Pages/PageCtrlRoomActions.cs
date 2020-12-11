@@ -1,5 +1,12 @@
 ﻿using PaulasCadenza.BaseUI.Controls;
 using PaulasCadenza.CommObjects.ReadCommObjects;
+using PaulasCadenza.CommObjects.WriteCommObjects;
+using PaulasCadenza.UI.Controls;
+using PaulasCadenza.Utilities;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Linq;
 
 namespace PaulasCadenza.UI.Pages
 {
@@ -11,6 +18,27 @@ namespace PaulasCadenza.UI.Pages
 				OnNetworkCommReadObjectReceived;
 
 			InitializeComponent();
+
+			CtlFloor.TileClicked += OnTileClicked;
+			LstUsers.DoubleClickList += OnDoubleClickList;
+
+			CmbWalkType.Items.AddRange(Helpers.PlatoonSgt.GetCadences().ToArray());
+			CmbWalkType.SelectedIndex = 0;
+		}
+
+		private void OnDoubleClickList(object sender, CtrlRoomUsers.DoubleClickEventArgs e)
+		{
+			TxtAvatar.Text = e.HabboUser.Figure;
+			ChkAvatarMale.Checked = e.HabboUser.IsMale.GetValueOrDefault();
+		}
+
+		private void OnTileClicked(object sender, CtrlFloor.TileClickedEventArgs e)
+		{
+			var sel = CmbWalkType.SelectedItem as Helpers.Cadence;
+			if(sel != null)
+			{
+				CadenzaBots.Instance.MoveTo(new Point(e.X, e.Y), sel.DeriveOffsets, CadenzaBots.WriteType.Selected);
+			}
 		}
 
 		private void OnNetworkCommReadObjectReceived(object sender,
@@ -18,20 +46,61 @@ namespace PaulasCadenza.UI.Pages
 		{
 			if(e.CommReadObject is RCOHeightMap heightMap)
 			{
-				// ignore for now
+				Invoke(new Action(() => CtlFloor.HeightMap = heightMap));
 			}
-			else if(e.CommReadObject is RCOFloorHeightMap floorHeightMap)
+		}
+
+		private void TxtTalk_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
 			{
-				for (var x = 0; x < floorHeightMap.Width; ++x)
+				e.SuppressKeyPress = true;
+				if(ChkShout.Checked)
 				{
-					for(var y = 0; y < floorHeightMap.Height; ++y)
-					{
-						var v = floorHeightMap.GetFloorHeightAtPoint(x, y);
-						System.Console.Write($"{(v >= 0 ? v.ToString() : " ")}");
-					}
-					System.Console.WriteLine();
+					CadenzaBots.Instance.WriteCommObjectAsync(
+						new WCOShout(TxtTalk.Text, PRNG.Instance.Next(6)), CadenzaBots.WriteType.Selected);
+				}
+				else
+				{
+					CadenzaBots.Instance.WriteCommObjectAsync(
+						new WCOTalk(TxtTalk.Text, PRNG.Instance.Next(6)), CadenzaBots.WriteType.Selected);
+				}
+				TxtTalk.Text = string.Empty;
+			}
+		}
+
+		private void TxtAvatar_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				if(TxtAvatar.Text.Length > 0)
+				{
+					CadenzaBots.Instance.WriteCommObjectAsync(
+						new WCOAvatar(ChkAvatarMale.Checked, TxtAvatar.Text), CadenzaBots.WriteType.Selected);
 				}
 			}
+		}
+
+		private void BtnRndHLAvatar_Click(object sender, EventArgs e)
+		{
+			CadenzaBots.Instance.AssignRandomAvatarAsync(true, CadenzaBots.WriteType.Selected);
+
+			TxtAvatar.Text = CadenzaBots.Instance.GetRandomAvatar(true, out bool isMale);
+			ChkAvatarMale.Checked = isMale;
+		}
+
+		private void BtnRndAvatar_Click(object sender, EventArgs e)
+		{
+			CadenzaBots.Instance.AssignRandomAvatarAsync(false, CadenzaBots.WriteType.Selected);
+			
+			TxtAvatar.Text = CadenzaBots.Instance.GetRandomAvatar(false, out bool isMale);
+			ChkAvatarMale.Checked = isMale;
+		}
+
+		private void BtnActions_Click(object sender, EventArgs args)
+		{
+			Helpers.ActionsContextMenu.Create(this).Show(BtnActions, new Point(0, BtnActions.Height));
 		}
 	}
 }

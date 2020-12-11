@@ -65,7 +65,13 @@
 			this.CmbHotel.FormattingEnabled = true;
 			this.CmbHotel.Items.AddRange(new object[] {
             "https://www.habbo.com/hotel",
-            "https://www.habbo.es/hotel"});
+            "https://www.habbo.es/hotel",
+            "https://www.habbo.fr/hotel",
+            "https://www.habbo.fi/hotel",
+            "https://www.habbo.nl/hotel",
+            "https://www.habbo.br/hotel",
+            "https://www.habbo.it/hotel",
+            "https://www.habbo.de/hotel"});
 			this.CmbHotel.Location = new System.Drawing.Point(88, 74);
 			this.CmbHotel.Name = "CmbHotel";
 			this.CmbHotel.Size = new System.Drawing.Size(229, 23);

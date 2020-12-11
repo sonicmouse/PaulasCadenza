@@ -1,15 +1,18 @@
-﻿using PaulasCadenza.HabboDHM;
-using PaulasCadenza.HabboNetwork;
-using PaulasCadenza.HabboNetwork.CommEventArgs;
-using PaulasCadenza.CommObjects.ReadCommObjects;
+﻿using PaulasCadenza.CommObjects.ReadCommObjects;
 using PaulasCadenza.CommObjects.WriteCommObjects;
 using PaulasCadenza.Data;
+using PaulasCadenza.HabboDHM;
+using PaulasCadenza.HabboNetwork;
+using PaulasCadenza.HabboNetwork.CommEventArgs;
 using PaulasCadenza.Models;
 using PaulasCadenza.UI.Forms;
 using PaulasCadenza.Utilities;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PaulasCadenza
@@ -57,14 +60,6 @@ namespace PaulasCadenza
 			return false;
 		}
 
-		public void SelectBot(AccountModel acct, bool selected = true)
-		{
-			if(_bots.ContainsKey(acct))
-			{
-				_bots[acct].Selected = selected;
-			}
-		}
-
 		public void Disconnect(AccountModel acct)
 		{
 			if(_bots.ContainsKey(acct))
@@ -73,6 +68,19 @@ namespace PaulasCadenza
 				_bots.TryRemove(acct, out var c);
 				NetworkCommPublisher.Interface.PublishDisconnected(c.Bot.Account);
 			}
+		}
+
+		public void SelectBot(AccountModel acct, bool selected = true)
+		{
+			if (_bots.ContainsKey(acct))
+			{
+				_bots[acct].Selected = selected;
+			}
+		}
+
+		public RoomUsers GetRoomUsers(AccountModel acct)
+		{
+			return _bots[acct].Bot.RoomUsers;
 		}
 
 		public enum WriteType
@@ -84,30 +92,116 @@ namespace PaulasCadenza
 			Selected
 		}
 
-		public void WriteCommObjectAsync(CommWriteObject cwo, WriteType type)
+		private IEnumerable<CadenzaBotModel> GetBotSet(WriteType type)
 		{
 			var bots = _bots.Values.Select(x => x.Bot);
 
-			if (type == WriteType.First)
+			switch (type)
 			{
-				bots = _bots.Take(1).Select(x => x.Value.Bot);
+				case WriteType.First:
+					bots = _bots.Take(1).Select(x => x.Value.Bot);
+					break;
+				case WriteType.Last:
+					bots = _bots.Reverse().Take(1).Select(x => x.Value.Bot);
+					break;
+				case WriteType.Random:
+					bots = _bots.Skip(PRNG.Instance.Next(_bots.Count)).Take(1).Select(x => x.Value.Bot);
+					break;
+				case WriteType.Selected:
+					bots = _bots.Where(x => x.Value.Selected).Select(x => x.Value.Bot);
+					break;
 			}
-			else if(type == WriteType.Last)
-			{
-				bots = _bots.Reverse().Take(1).Select(x => x.Value.Bot);
-			}
-			else if(type == WriteType.Random)
-			{
-				bots = _bots.Skip(PRNG.Instance.Next(_bots.Count)).Take(1).Select(x => x.Value.Bot);
-			}
-			else if(type == WriteType.Selected)
-			{
-				bots = _bots.Where(x => x.Value.Selected).Select(x => x.Value.Bot);
-			}
+			return bots;
+		}
 
-			foreach(var bot in bots)
+		public void WriteCommObjectAsync(CommWriteObject cwo, WriteType type)
+		{
+			foreach (var bot in GetBotSet(type))
 			{
 				bot.Comm.WriteCommObjectsAsync(cwo);
+			}
+		}
+
+		public async Task WriteCommObjectTaskAsync(CommWriteObject cwo, WriteType type, int? throttleBy = null)
+		{
+			foreach (var bot in GetBotSet(type))
+			{
+				bot.Comm.WriteCommObjectsAsync(cwo);
+				if(throttleBy.HasValue)
+				{
+					await Task.Delay(throttleBy.Value).ConfigureAwait(false);
+				}
+			}
+		}
+
+		public void ShowSignAsync(int? value, WriteType type)
+		{
+			foreach(var bot in GetBotSet(type))
+			{
+				bot.Comm.WriteCommObjectsAsync(new WCOShowSign(value.GetValueOrDefault(PRNG.Instance.Next(18))));
+			}
+		}
+
+		public void LookAtAsync(int dir, WriteType type)
+		{
+			// zero is upper left, then clockwise
+			if(dir < 0 || dir > 7) { return; }
+
+			var offsets = new (int, int)[] { (-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0) };
+
+			foreach(var bot in GetBotSet(type))
+			{
+				var roomEntity = bot.RoomUsers.GetAllUsers().FirstOrDefault(x => x.HabboId == bot.HabboId);
+
+				bot.Comm.WriteCommObjectsAsync(
+					new WCOLookAt(roomEntity.X + offsets[dir].Item1, roomEntity.Y + offsets[dir].Item2));
+			}
+		}
+
+		public void AssignRandomAvatarAsync(bool hotLook, WriteType type)
+		{
+			foreach (var bot in GetBotSet(type))
+			{
+				string avatar;
+				bool isMale;
+				if (hotLook)
+				{
+					avatar = bot.Figure.GetRandomHotLookFigure(out isMale);
+				}
+				else
+				{
+					avatar = bot.Figure.GetRandomFigure(out isMale);
+				}
+				bot.Comm.WriteCommObjectsAsync(new WCOAvatar(isMale, avatar));
+			}
+		}
+
+		public string GetRandomAvatar(bool hotLook, out bool isMale)
+		{
+			var bot = GetBotSet(WriteType.Random).First();
+			if (hotLook)
+			{
+				return bot.Figure.GetRandomHotLookFigure(out isMale);
+			}
+			else
+			{
+				return bot.Figure.GetRandomFigure(out isMale);
+			}
+		}
+
+		public void MoveTo(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
+		{
+			var bots = GetBotSet(type);
+
+			var botCount = bots.Count();
+			var pts = f.Invoke(botCount).Take(botCount).ToArray();
+
+			var index = 0;
+			foreach (var b in bots)
+			{
+				b.Comm.WriteCommObjectsAsync(
+					new WCOMove(ptStart.X + pts[index].X, ptStart.Y + pts[index].Y));
+				++index;
 			}
 		}
 
@@ -121,8 +215,7 @@ namespace PaulasCadenza
 				new WCOHello(),
 				new WCOBeginHandshake());
 
-			var c = _bots[comm.Tag as AccountModel];
-			NetworkCommPublisher.Interface.PublishConnected(c.Bot.Account);
+			NetworkCommPublisher.Interface.PublishConnected(comm.Tag as AccountModel);
 		}
 
 		private void OnCommDisconnected(object sender, DisconnectedEventArgs e)
@@ -137,7 +230,7 @@ namespace PaulasCadenza
 
 		private void OnCommReceivedCommObject(object sender, ReceivedCommObjectEventArgs e)
 		{
-			Console.WriteLine($"-> RECEIVED PACKET: {e.CommReadObject.GetType().Name}");
+			Console.WriteLine($"-> RECEIVED OBJECT: {e.CommReadObject.GetType().Name}");
 
 			var bot = _bots[((Communication)sender).Tag as AccountModel].Bot;
 
@@ -180,17 +273,20 @@ namespace PaulasCadenza
 			{
 				bot.Comm.WriteCommObjectsAsync(new WCORoomSubscribe());
 			}
+			else if(e.CommReadObject is RCOIdentity identity)
+			{
+				bot.HabboId = identity.HabboId;
+			}
 		}
 
 		private void OnCommReceivedUnknownObject(object sender, ReceivedUnknownObjectEventArgs e)
 		{
-			Console.WriteLine($"UNKNOWN PACKET ({e.SendType}):");
-			Console.WriteLine(e.HexDump);
+			Console.WriteLine($"UNKNOWN OBJECT ({e.SendType}):\n{e.HexDump}");
 		}
 
 		private void OnCommSentCommObject(object sender, SentCommObjectEventArgs e)
 		{
-			Console.WriteLine($"<- SENT PACKET: {(e.Tag is CommWriteObject asdf ? asdf.GetType().Name : "<unknown>")}");
+			Console.WriteLine($"<- SENT OBJECT: {(e.Tag is CommWriteObject asdf ? asdf.GetType().Name : "<unknown>")}");
 		}
 		#endregion
 	}

@@ -5,7 +5,7 @@ namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
 	public sealed class WCORoomSubscribe : CommWriteObject
 	{
-		public override ushort SendType => 2137;
+		public override ushort SendType => 1760;
 
 		public override void Serialize(CommWriter writer) { }
 	}

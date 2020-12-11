@@ -8,7 +8,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 	{
 		public IReadOnlyList<string> MetaData { get; private set; }
 
-		public override ushort SendType => 962;
+		public override ushort SendType => 1068;
 
 		public override void Deserialize(CommReader reader)
 		{
