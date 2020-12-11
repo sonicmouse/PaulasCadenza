@@ -189,7 +189,7 @@ namespace PaulasCadenza
 			}
 		}
 
-		public void MoveTo(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
+		public void MoveToAsync(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
 		{
 			var bots = GetBotSet(type);
 
@@ -223,14 +223,16 @@ namespace PaulasCadenza
 			var acct = ((Communication)sender).Tag as AccountModel;
 			if (_bots.ContainsKey(acct))
 			{
-				_bots.TryRemove(acct, out var c);
-				NetworkCommPublisher.Interface.PublishDisconnected(c.Bot.Account);
+				if(_bots.TryRemove(acct, out var c))
+				{
+					NetworkCommPublisher.Interface.PublishDisconnected(c.Bot.Account);
+				}
 			}
 		}
 
 		private void OnCommReceivedCommObject(object sender, ReceivedCommObjectEventArgs e)
 		{
-			Console.WriteLine($"-> RECEIVED OBJECT: {e.CommReadObject.GetType().Name}");
+			System.Diagnostics.Debug.WriteLine($"-> RECEIVED OBJECT: {e.CommReadObject.GetType().Name}");
 
 			var bot = _bots[((Communication)sender).Tag as AccountModel].Bot;
 
@@ -281,12 +283,12 @@ namespace PaulasCadenza
 
 		private void OnCommReceivedUnknownObject(object sender, ReceivedUnknownObjectEventArgs e)
 		{
-			Console.WriteLine($"UNKNOWN OBJECT ({e.SendType}):\n{e.HexDump}");
+			System.Diagnostics.Debug.WriteLine($"!! UNKNOWN OBJECT ({e.SendType}):\n{e.HexDump}");
 		}
 
 		private void OnCommSentCommObject(object sender, SentCommObjectEventArgs e)
 		{
-			Console.WriteLine($"<- SENT OBJECT: {(e.Tag is CommWriteObject asdf ? asdf.GetType().Name : "<unknown>")}");
+			System.Diagnostics.Debug.WriteLine($"<- SENT OBJECT: {(e.Tag is CommWriteObject cwo ? cwo.GetType().Name : "<unknown>")}");
 		}
 		#endregion
 	}

@@ -34,7 +34,7 @@ namespace PaulasCadenza
 			}
 			finally
 			{
-				CEFSettings.TeardownGlobalSettings();
+				CEFSettings.TearDownGlobalSettings();
 			}
 		}
 	}
