@@ -10,6 +10,7 @@ using PaulasCadenza.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -185,6 +186,22 @@ namespace PaulasCadenza
 			else
 			{
 				return bot.Figure.GetRandomFigure(out isMale);
+			}
+		}
+
+		public void MoveTo(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
+		{
+			var bots = GetBotSet(type);
+
+			var botCount = bots.Count();
+			var pts = f.Invoke(botCount).Take(botCount).ToArray();
+
+			var index = 0;
+			foreach (var b in bots)
+			{
+				b.Comm.WriteCommObjectsAsync(
+					new WCOMove(ptStart.X + pts[index].X, ptStart.Y + pts[index].Y));
+				++index;
 			}
 		}
 

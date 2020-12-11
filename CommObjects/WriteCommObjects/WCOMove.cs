@@ -3,10 +3,10 @@ using PaulasCadenza.HabboNetwork.IO;
 
 namespace PaulasCadenza.CommObjects.WriteCommObjects
 {
-	public sealed class WCOWalk : CommWriteObject
+	public sealed class WCOMove : CommWriteObject
 	{
 		private readonly int _x, _y;
-		public WCOWalk(int x, int y)
+		public WCOMove(int x, int y)
 		{
 			_x = x;
 			_y = y;

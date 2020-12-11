@@ -126,7 +126,7 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOTalkBubble.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOTrackEventLog.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOPong.cs" />
-    <Compile Include="CommObjects\WriteCommObjects\WCOWalk.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOMove.cs" />
     <Compile Include="Data\Accounts.cs" />
     <Compile Include="Data\CEFSettings.cs" />
     <Compile Include="Data\FigureData.cs" />
@@ -182,6 +182,7 @@
       <DependentUpon>FormMotto.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Helpers\ActionsContextMenu.cs" />
+    <Compile Include="UI\Helpers\PlatoonSgt.cs" />
     <Compile Include="UI\Pages\PageCtrlRoomActions.cs">
       <SubType>UserControl</SubType>
     </Compile>

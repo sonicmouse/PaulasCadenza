@@ -6,6 +6,7 @@ using PaulasCadenza.Utilities;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace PaulasCadenza.UI.Pages
 {
@@ -21,7 +22,8 @@ namespace PaulasCadenza.UI.Pages
 			CtlFloor.TileClicked += OnTileClicked;
 			LstUsers.DoubleClickList += OnDoubleClickList;
 
-			//CmbWalkType.Items.Add("");
+			CmbWalkType.Items.AddRange(Helpers.PlatoonSgt.GetCadences().ToArray());
+			CmbWalkType.SelectedIndex = 0;
 		}
 
 		private void OnDoubleClickList(object sender, CtrlRoomUsers.DoubleClickEventArgs e)
@@ -32,7 +34,11 @@ namespace PaulasCadenza.UI.Pages
 
 		private void OnTileClicked(object sender, CtrlFloor.TileClickedEventArgs e)
 		{
-			CadenzaBots.Instance.WriteCommObjectAsync(new WCOWalk(e.X, e.Y), CadenzaBots.WriteType.Selected);
+			var sel = CmbWalkType.SelectedItem as Helpers.Cadence;
+			if(sel != null)
+			{
+				CadenzaBots.Instance.MoveTo(new Point(e.X, e.Y), sel.DeriveOffsets, CadenzaBots.WriteType.Selected);
+			}
 		}
 
 		private void OnNetworkCommReadObjectReceived(object sender,
