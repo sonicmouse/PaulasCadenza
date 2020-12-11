@@ -189,12 +189,12 @@ namespace PaulasCadenza
 			}
 		}
 
-		public void MoveToAsync(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
+		public void MoveToAsync(Point ptStart, Func<int, IEnumerable<Point>> ptFactory, WriteType type)
 		{
 			var bots = GetBotSet(type);
 
 			var botCount = bots.Count();
-			var pts = f.Invoke(botCount).Take(botCount).ToArray();
+			var pts = ptFactory.Invoke(botCount).Take(botCount).ToArray();
 
 			var index = 0;
 			foreach (var b in bots)

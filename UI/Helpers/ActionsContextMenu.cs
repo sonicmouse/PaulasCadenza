@@ -1,24 +1,51 @@
 ﻿using PaulasCadenza.CommObjects.WriteCommObjects;
 using PaulasCadenza.UI.Forms;
+using PaulasCadenza.Utilities;
 using System.Windows.Forms;
 
 namespace PaulasCadenza.UI.Helpers
 {
 	public static class ActionsContextMenu
 	{
+		public enum DizzyTypes
+		{
+			Incremental, Alternate1, Alternate2, Paranoid
+		}
+
 		private static System.Threading.Timer _tLookAround;
 		private static int _lookAt;
+		private static DizzyTypes _dizzy;
 
-		private static void LookAround(bool start, int interval = 500)
+		private static void Dizzier(bool start, DizzyTypes dizzy, int interval = 500)
 		{
+			const int max = 7;
+
 			_tLookAround?.Dispose();
+			_dizzy = dizzy;
+			void initLookAt()
+			{
+				switch (_dizzy)
+				{
+					case DizzyTypes.Incremental: _lookAt = 0; break;
+					case DizzyTypes.Alternate1: _lookAt = 0; break;
+					case DizzyTypes.Alternate2: _lookAt = 1; break;
+					case DizzyTypes.Paranoid: _lookAt = PRNG.Instance.Next(max); break;
+				}
+			}
 			if (start)
 			{
-				_lookAt = 0;
+				initLookAt();
 				_tLookAround = new System.Threading.Timer(_ =>
 				{
 					CadenzaBots.Instance.LookAtAsync(_lookAt, CadenzaBots.WriteType.Selected);
-					if (++_lookAt > 7) { _lookAt = 0; }
+					switch (_dizzy)
+					{
+						case DizzyTypes.Incremental: ++_lookAt; break;
+						case DizzyTypes.Alternate1: _lookAt += 2; break;
+						case DizzyTypes.Alternate2: _lookAt += 2; break;
+						case DizzyTypes.Paranoid: _lookAt = PRNG.Instance.Next(max); break;
+					}
+					if(_lookAt > max) { initLookAt(); }
 				}, null, 0, interval);
 			}
 		}
@@ -94,10 +121,18 @@ namespace PaulasCadenza.UI.Helpers
 					new WCODropCarryItem(), CadenzaBots.WriteType.Selected));
 
 			var menuDizzy = new MenuItem("Dizzy");
+			var menuDizzyStart = new MenuItem("Start");
+			menuDizzyStart.MenuItems.AddRange(new MenuItem[]
+			{
+				new MenuItem("Incremental", (s, e) => Dizzier(true, DizzyTypes.Incremental)),
+				new MenuItem("Alternate 1", (s, e) => Dizzier(true, DizzyTypes.Alternate1)),
+				new MenuItem("Alternate 2", (s, e) => Dizzier(true, DizzyTypes.Alternate2)),
+				new MenuItem("Paranoid", (s, e) => Dizzier(true, DizzyTypes.Paranoid))
+			});
 			menuDizzy.MenuItems.AddRange(new MenuItem[]
 			{
-				new MenuItem("Start", (s, e) => LookAround(true)),
-				new MenuItem("Stop", (s,e) => LookAround(false))
+				menuDizzyStart,
+				new MenuItem("Stop", (s,e) => Dizzier(false, DizzyTypes.Alternate1))
 			});
 
 			var menuMotto = new MenuItem("Set Motto", (s, e) =>
