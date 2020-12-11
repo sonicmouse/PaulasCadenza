@@ -7,7 +7,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
 	public sealed class RCORoomUsers : CommReadObject
 	{
-		public Dictionary<uint, HabboUser> Users { get; } = new Dictionary<uint, HabboUser>();
+		public Dictionary<uint, HabboUserModel> Users { get; } = new Dictionary<uint, HabboUserModel>();
 
 		public override ushort SendType => 1496;
 
@@ -26,9 +26,9 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 				var z = double.Parse(reader.ReadString());
 				var dir = reader.ReadInteger();
 
-				var user = new HabboUser(entityId)
+				var user = new HabboUserModel(entityId)
 				{
-					Id = id,
+					HabboId = id,
 					Name = name,
 					Custom = custom,
 					Figure = figure,

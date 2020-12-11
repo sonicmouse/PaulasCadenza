@@ -7,10 +7,10 @@ namespace PaulasCadenza.Data
 {
 	public sealed class RoomUsers
 	{
-		private readonly ConcurrentDictionary<uint, HabboUser> _users =
-			new ConcurrentDictionary<uint, HabboUser>();
+		private readonly ConcurrentDictionary<uint, HabboUserModel> _users =
+			new ConcurrentDictionary<uint, HabboUserModel>();
 
-		public void AddUsers(Dictionary<uint, HabboUser> d)
+		public void AddUsers(Dictionary<uint, HabboUserModel> d)
 		{
 			foreach(var u in d)
 			{
@@ -26,7 +26,7 @@ namespace PaulasCadenza.Data
 			}
 		}
 
-		public void UpdateUsers(IEnumerable<RoomUserUpdate> users)
+		public void UpdateUsers(IEnumerable<RoomUserUpdateModel> users)
 		{
 			foreach(var u in users)
 			{
@@ -41,7 +41,7 @@ namespace PaulasCadenza.Data
 			}
 		}
 
-		public void UpdateUserDetails(RoomUserDetails details)
+		public void UpdateUserDetails(RoomUserDetailsModel details)
 		{
 			if(_users.ContainsKey(details.EntityId))
 			{
@@ -53,7 +53,7 @@ namespace PaulasCadenza.Data
 			}
 		}
 
-		public IEnumerable<HabboUser> GetAllUsers()
+		public IEnumerable<HabboUserModel> GetAllUsers()
 		{
 			return _users.Select(x => x.Value);
 		}

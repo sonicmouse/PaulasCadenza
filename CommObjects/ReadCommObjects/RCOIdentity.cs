@@ -5,7 +5,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
 	public sealed class RCOIdentity : CommReadObject
 	{
-		public uint Id { get; private set; }
+		public uint HabboId { get; private set; }
 		public string Name { get; private set; }
 		public string Figure { get; private set; }
 		public bool IsMale { get; private set; }
@@ -15,7 +15,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 
 		public override void Deserialize(CommReader reader)
 		{
-			Id = reader.ReadUnsignedInteger();
+			HabboId = reader.ReadUnsignedInteger();
 			Name = reader.ReadString();
 			Figure = reader.ReadString();
 			IsMale = reader.ReadString().ToUpper() == "M";

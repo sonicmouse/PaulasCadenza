@@ -2,10 +2,10 @@
 
 namespace PaulasCadenza.Models
 {
-	public class HabboUser : IEquatable<HabboUser>
+	public class HabboUserModel : IEquatable<HabboUserModel>
 	{
 		public uint EntityId { get; }
-		public uint Id { get; set; }
+		public uint HabboId { get; set; }
 		public string Name { get; set; }
 		public string Custom { get; set; }
 		public string Figure { get; set; }
@@ -16,17 +16,17 @@ namespace PaulasCadenza.Models
 		public bool? IsMale { get; set; }
 		public int Score { get; set; }
 
-		public HabboUser(uint entityId)
+		public HabboUserModel(uint entityId)
 		{
 			EntityId = entityId;
 		}
 
 		public override string ToString()
 		{
-			return $"{Name} ({Id:N0})";
+			return $"{Name} ({HabboId:N0})";
 		}
 
-		public bool Equals(HabboUser other)
+		public bool Equals(HabboUserModel other)
 		{
 			return (other != null) && (other.EntityId == EntityId);
 		}
@@ -38,7 +38,7 @@ namespace PaulasCadenza.Models
 
 		public override bool Equals(object obj)
 		{
-			return Equals(obj as HabboUser);
+			return Equals(obj as HabboUserModel);
 		}
 	}
 }

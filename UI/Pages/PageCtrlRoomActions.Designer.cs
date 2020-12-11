@@ -41,6 +41,7 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.ChkShout = new System.Windows.Forms.CheckBox();
 			this.TxtTalk = new System.Windows.Forms.TextBox();
+			this.CmbWalkType = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +66,7 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.CmbWalkType);
 			this.splitContainer1.Panel2.Controls.Add(this.BtnActions);
 			this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
 			this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
@@ -217,6 +219,16 @@
 			this.TxtTalk.TabIndex = 0;
 			this.TxtTalk.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtTalk_KeyDown);
 			// 
+			// CmbWalkType
+			// 
+			this.CmbWalkType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.CmbWalkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.CmbWalkType.FormattingEnabled = true;
+			this.CmbWalkType.Location = new System.Drawing.Point(135, 120);
+			this.CmbWalkType.Name = "CmbWalkType";
+			this.CmbWalkType.Size = new System.Drawing.Size(92, 23);
+			this.CmbWalkType.TabIndex = 3;
+			// 
 			// PageCtrlRoomActions
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -255,5 +267,6 @@
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private Controls.CtrlFloor CtlFloor;
 		private Controls.CtrlRoomUsers LstUsers;
+		private System.Windows.Forms.ComboBox CmbWalkType;
 	}
 }

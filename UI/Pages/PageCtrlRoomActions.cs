@@ -20,6 +20,8 @@ namespace PaulasCadenza.UI.Pages
 
 			CtlFloor.TileClicked += OnTileClicked;
 			LstUsers.DoubleClickList += OnDoubleClickList;
+
+			//CmbWalkType.Items.Add("");
 		}
 
 		private void OnDoubleClickList(object sender, CtrlRoomUsers.DoubleClickEventArgs e)
@@ -28,7 +30,7 @@ namespace PaulasCadenza.UI.Pages
 			ChkAvatarMale.Checked = e.HabboUser.IsMale.GetValueOrDefault();
 		}
 
-		private void OnTileClicked(object sender, Controls.CtrlFloor.TileClickedEventArgs e)
+		private void OnTileClicked(object sender, CtrlFloor.TileClickedEventArgs e)
 		{
 			CadenzaBots.Instance.WriteCommObjectAsync(new WCOWalk(e.X, e.Y), CadenzaBots.WriteType.Selected);
 		}
@@ -92,67 +94,7 @@ namespace PaulasCadenza.UI.Pages
 
 		private void BtnActions_Click(object sender, EventArgs args)
 		{
-			void Dance(int index) { CadenzaBots.Instance.WriteCommObjectAsync(
-				new WCODance(index), CadenzaBots.WriteType.Selected); }
-			var menuDance = new MenuItem("Dance");
-			menuDance.MenuItems.AddRange(new MenuItem[]
-			{
-				new MenuItem("Start", (s, e) => Dance(1)),
-				new MenuItem("Stop", (s, e) => Dance(0))
-			});
-
-			void Gesture(int gest) { CadenzaBots.Instance.WriteCommObjectAsync(
-				new WCOGesture(gest), CadenzaBots.WriteType.Selected); }
-			void Sit(bool sit) { CadenzaBots.Instance.WriteCommObjectAsync(
-				new WCOSit(sit), CadenzaBots.WriteType.Selected); }
-			var menuActions = new MenuItem("Actions");
-			menuActions.MenuItems.AddRange(new MenuItem[]
-			{
-				new MenuItem("Sit", (s, e) => Sit(true)),
-				new MenuItem("Stand", (s, e) => Sit(false)),
-				new MenuItem("-"),
-				new MenuItem("Wave", (s, e) => Gesture(1)),
-				new MenuItem("Idle", (s, e) => Gesture(5)),
-				new MenuItem("Gang Sign", (s, e) => Gesture(7))
-			});
-
-			void Sign(int? sign) { CadenzaBots.Instance.ShowSignAsync(sign, CadenzaBots.WriteType.Selected); }
-			var menuSigns = new MenuItem("Signs");
-			menuSigns.MenuItems.AddRange(new MenuItem[]
-			{
-				new MenuItem("Random", (s, e) => Sign(null)), new MenuItem("-"),
-				new MenuItem("0", (s, e) => Sign(0)), new MenuItem("1", (s, e) => Sign(1)),
-				new MenuItem("2", (s, e) => Sign(2)), new MenuItem("3", (s, e) => Sign(3)),
-				new MenuItem("4", (s, e) => Sign(4)), new MenuItem("5", (s, e) => Sign(5)),
-				new MenuItem("6", (s, e) => Sign(6)), new MenuItem("7", (s, e) => Sign(7)),
-				new MenuItem("8", (s, e) => Sign(8)), new MenuItem("9", (s, e) => Sign(9)),
-				new MenuItem("10", (s, e) => Sign(10)), new MenuItem("Heart", (s, e) => Sign(11)),
-				new MenuItem("Skull", (s, e) => Sign(12)), new MenuItem("Exclaim", (s, e) => Sign(13)),
-				new MenuItem("Ball", (s, e) => Sign(14)), new MenuItem("Smile", (s, e) => Sign(15)),
-				new MenuItem("Red Card", (s, e) => Sign(16)), new MenuItem("Yellow Card", (s, e) => Sign(17))
-			});
-
-			void Bubble(bool on) { CadenzaBots.Instance.WriteCommObjectAsync(
-				new WCOTalkBubble(on), CadenzaBots.WriteType.Selected); }
-			var menuChatBubble = new MenuItem("Chat Bubble");
-			menuChatBubble.MenuItems.AddRange(new MenuItem[]
-			{
-				new MenuItem("On", (s, e) => Bubble(true)),
-				new MenuItem("Off", (s, e) => Bubble(false))
-			});
-
-			var menuDropItem = new MenuItem("Drop Item", (s, e)
-				=> CadenzaBots.Instance.WriteCommObjectAsync(
-					new WCODropCarryItem(), CadenzaBots.WriteType.Selected));
-
-			new ContextMenu(new MenuItem[]
-			{
-				menuDance,
-				menuActions,
-				menuSigns,
-				menuChatBubble,
-				menuDropItem
-			}).Show(BtnActions, new Point(0, BtnActions.Size.Height));
+			Helpers.ActionsContextMenu.Create(this).Show(BtnActions, new Point(0, BtnActions.Height));
 		}
 	}
 }

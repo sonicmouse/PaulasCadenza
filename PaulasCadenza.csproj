@@ -113,6 +113,8 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOGesture.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOGotoRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOHello.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOLookAt.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOMotto.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOShowSign.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOLeaveRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORequestRoomCategories.cs" />
@@ -136,9 +138,9 @@
     <Compile Include="Models\FigureDataHotLooksModel.cs" />
     <Compile Include="Models\FigureDataModel.cs" />
     <Compile Include="Models\FlashVarsModel.cs" />
-    <Compile Include="Models\HabboUser.cs" />
-    <Compile Include="Models\RoomUserDetails.cs" />
-    <Compile Include="Models\RoomUserUpdate.cs" />
+    <Compile Include="Models\HabboUserModel.cs" />
+    <Compile Include="Models\RoomUserDetailsModel.cs" />
+    <Compile Include="Models\RoomUserUpdateModel.cs" />
     <Compile Include="Models\SearchedRoomModel.cs" />
     <Compile Include="NetworkCommPublisher.cs" />
     <Compile Include="UI\Controls\CtrlFloor.cs">
@@ -173,6 +175,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Forms\FormMotto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormMotto.Designer.cs">
+      <DependentUpon>FormMotto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Helpers\ActionsContextMenu.cs" />
     <Compile Include="UI\Pages\PageCtrlRoomActions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\FormMotto.resx">
+      <DependentUpon>FormMotto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Pages\PageCtrlRoomActions.resx">
       <DependentUpon>PageCtrlRoomActions.cs</DependentUpon>

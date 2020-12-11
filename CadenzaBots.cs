@@ -11,6 +11,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PaulasCadenza
@@ -58,14 +59,6 @@ namespace PaulasCadenza
 			return false;
 		}
 
-		public void SelectBot(AccountModel acct, bool selected = true)
-		{
-			if(_bots.ContainsKey(acct))
-			{
-				_bots[acct].Selected = selected;
-			}
-		}
-
 		public void Disconnect(AccountModel acct)
 		{
 			if(_bots.ContainsKey(acct))
@@ -73,6 +66,14 @@ namespace PaulasCadenza
 				_bots[acct].Bot.Comm.Disconnect();
 				_bots.TryRemove(acct, out var c);
 				NetworkCommPublisher.Interface.PublishDisconnected(c.Bot.Account);
+			}
+		}
+
+		public void SelectBot(AccountModel acct, bool selected = true)
+		{
+			if (_bots.ContainsKey(acct))
+			{
+				_bots[acct].Selected = selected;
 			}
 		}
 
@@ -120,11 +121,39 @@ namespace PaulasCadenza
 			}
 		}
 
+		public async Task WriteCommObjectTaskAsync(CommWriteObject cwo, WriteType type, int? throttleBy = null)
+		{
+			foreach (var bot in GetBotSet(type))
+			{
+				bot.Comm.WriteCommObjectsAsync(cwo);
+				if(throttleBy.HasValue)
+				{
+					await Task.Delay(throttleBy.Value).ConfigureAwait(false);
+				}
+			}
+		}
+
 		public void ShowSignAsync(int? value, WriteType type)
 		{
 			foreach(var bot in GetBotSet(type))
 			{
 				bot.Comm.WriteCommObjectsAsync(new WCOShowSign(value.GetValueOrDefault(PRNG.Instance.Next(18))));
+			}
+		}
+
+		public void LookAtAsync(int dir, WriteType type)
+		{
+			// zero is upper left, then clockwise
+			if(dir < 0 || dir > 7) { return; }
+
+			var offsets = new (int, int)[] { (-1, -1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0) };
+
+			foreach(var bot in GetBotSet(type))
+			{
+				var roomEntity = bot.RoomUsers.GetAllUsers().FirstOrDefault(x => x.HabboId == bot.HabboId);
+
+				bot.Comm.WriteCommObjectsAsync(
+					new WCOLookAt(roomEntity.X + offsets[dir].Item1, roomEntity.Y + offsets[dir].Item2));
 			}
 		}
 
@@ -226,6 +255,10 @@ namespace PaulasCadenza
 			else if(e.CommReadObject is RCOEnteredRoom)
 			{
 				bot.Comm.WriteCommObjectsAsync(new WCORoomSubscribe());
+			}
+			else if(e.CommReadObject is RCOIdentity identity)
+			{
+				bot.HabboId = identity.HabboId;
 			}
 		}
 

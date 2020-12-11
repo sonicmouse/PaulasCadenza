@@ -13,7 +13,7 @@ namespace PaulasCadenza.UI.Controls
 
 		public sealed class DoubleClickEventArgs : EventArgs
 		{
-			public HabboUser HabboUser { get; set; }
+			public HabboUserModel HabboUser { get; set; }
 		}
 
 		public event EventHandler<DoubleClickEventArgs> DoubleClickList;
@@ -59,10 +59,10 @@ namespace PaulasCadenza.UI.Controls
 					_targetAccount = sender as AccountModel;
 				}
 
-				if(!_targetAccount.Equals(sender as AccountModel))
-				{
-					return;
-				}
+				//if(!_targetAccount.Equals(sender as AccountModel))
+				//{
+					//return;
+				//}
 			}
 
 			if (e.CommReadObject is RCORoomUsers usersJoin)
@@ -101,7 +101,7 @@ namespace PaulasCadenza.UI.Controls
 				foreach (var u in ru.GetAllUsers().ToList()) // clone it
 				{
 					// find it in the list...
-					if (!LstRoomUsers.Items.Cast<HabboUser>().Any(x => x.Equals(u)))
+					if (!LstRoomUsers.Items.Cast<HabboUserModel>().Any(x => x.Equals(u)))
 					{
 						// doesn't exist, add them
 						LstRoomUsers.Items.Add(u);
@@ -113,7 +113,7 @@ namespace PaulasCadenza.UI.Controls
 					}
 				}
 				// remove all users from list that are no longer on
-				LstRoomUsers.Items.Cast<HabboUser>().
+				LstRoomUsers.Items.Cast<HabboUserModel>().
 					Where(x => !ru.GetAllUsers().Any(y => y.Equals(x))).
 						ToList().ForEach(LstRoomUsers.Items.Remove);
 			}));
@@ -125,7 +125,7 @@ namespace PaulasCadenza.UI.Controls
 			{
 				DoubleClickList?.Invoke(this, new DoubleClickEventArgs
 				{
-					HabboUser = LstRoomUsers.SelectedItem as HabboUser
+					HabboUser = LstRoomUsers.SelectedItem as HabboUserModel
 				});
 			}
 		}

@@ -1,6 +1,6 @@
 ﻿namespace PaulasCadenza.Models
 {
-	public sealed class RoomUserUpdate
+	public sealed class RoomUserUpdateModel
 	{
 		public uint EntityId { get; set; }
 		public int X { get; set; }

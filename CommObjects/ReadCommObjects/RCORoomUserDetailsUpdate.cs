@@ -6,13 +6,13 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
 	public sealed class RCORoomUserDetailsUpdate : CommReadObject
 	{
-		public RoomUserDetails Details { get; private set; }
+		public RoomUserDetailsModel Details { get; private set; }
 
 		public override ushort SendType => 1615;
 
 		public override void Deserialize(CommReader reader)
 		{
-			Details = new RoomUserDetails
+			Details = new RoomUserDetailsModel
 			{
 				EntityId = reader.ReadUnsignedInteger(),
 				Avatar = reader.ReadString(),

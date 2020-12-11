@@ -7,7 +7,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 {
 	public sealed class RCORoomUsersUpdate : CommReadObject
 	{
-		public IList<RoomUserUpdate> UpdatedUsers = new List<RoomUserUpdate>();
+		public IList<RoomUserUpdateModel> UpdatedUsers = new List<RoomUserUpdateModel>();
 
 		public override ushort SendType => 283;
 
@@ -16,7 +16,7 @@ namespace PaulasCadenza.CommObjects.ReadCommObjects
 			var count = reader.ReadUnsignedInteger();
 			for(var i = 0; i < count; ++i)
 			{
-				UpdatedUsers.Add(new RoomUserUpdate
+				UpdatedUsers.Add(new RoomUserUpdateModel
 				{
 					EntityId = reader.ReadUnsignedInteger(),
 					X = reader.ReadInteger(),

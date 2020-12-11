@@ -87,21 +87,37 @@ namespace PaulasCadenza.UI.Pages
 
 		private void LstRooms_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
 		{
-			BtnEnter.PerformClick();
+			BtnEnterRoom.PerformClick();
 		}
 
 		private void BtnLeaveRoom_Click(object sender, EventArgs e)
 		{
-			CadenzaBots.Instance.WriteCommObjectAsync(new WCOLeaveRoom(), CadenzaBots.WriteType.Selected);
+			CadenzaBots.Instance.WriteCommObjectAsync(new WCOLeaveRoom(), CadenzaBots.WriteType.All);
 		}
 
-		private void BtnEnter_Click(object sender, EventArgs e)
+		private async void BtnEnter_Click(object sender, EventArgs e)
 		{
-			if (LstRooms.SelectedIndex != -1)
+			if(LstRooms.SelectedIndex == -1) { return; }
+
+			BtnEnterRoom.Enabled = false;
+			BtnLeaveRoom.Enabled = false;
+
+			try
 			{
 				var room = (SearchedRoomModel)LstRooms.SelectedItem;
-
-				CadenzaBots.Instance.WriteCommObjectAsync(new WCOGotoRoom(room.RoomId), CadenzaBots.WriteType.Selected);
+				if(ChkThrottledEnter.Checked)
+				{
+					await CadenzaBots.Instance.WriteCommObjectTaskAsync(new WCOGotoRoom(room.RoomId), CadenzaBots.WriteType.All, 1000);
+				}
+				else
+				{
+					CadenzaBots.Instance.WriteCommObjectAsync(new WCOGotoRoom(room.RoomId), CadenzaBots.WriteType.All);
+				}
+			}
+			finally
+			{
+				BtnEnterRoom.Enabled = true;
+				BtnLeaveRoom.Enabled = true;
 			}
 		}
 	}
