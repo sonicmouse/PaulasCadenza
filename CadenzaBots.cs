@@ -83,6 +83,14 @@ namespace PaulasCadenza
 			return _bots[acct].Bot.RoomUsers;
 		}
 
+		public void ClearAllRoomUsers()
+		{
+			foreach(var b in _bots)
+			{
+				b.Value.Bot.RoomUsers.RemoveAllUsers();
+			}
+		}
+
 		public enum WriteType
 		{
 			All,
@@ -234,9 +242,15 @@ namespace PaulasCadenza
 		{
 			System.Diagnostics.Debug.WriteLine($"-> RECEIVED OBJECT: {e.CommReadObject.GetType().Name}");
 
-			var bot = _bots[((Communication)sender).Tag as AccountModel].Bot;
+			var acct = ((Communication)sender).Tag as AccountModel;
+			if(acct == null || !_bots.ContainsKey(acct))
+			{
+				return;
+			}
 
-			NetworkCommPublisher.Interface.PublishCommReadObject(bot.Account, e.CommReadObject);
+			var bot = _bots[acct].Bot;
+
+			NetworkCommPublisher.Interface.PublishCommReadObject(acct, e.CommReadObject);
 
 			if (e.CommReadObject is RCOInitHandshake initHandshake)
 			{

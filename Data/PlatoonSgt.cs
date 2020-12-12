@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace PaulasCadenza.UI.Helpers
+namespace PaulasCadenza.Data
 {
 	public abstract class Cadence
 	{

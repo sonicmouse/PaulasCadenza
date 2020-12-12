@@ -4,47 +4,85 @@ using System.Security.Cryptography;
 
 namespace PaulasCadenza.Utilities
 {
-	public sealed class PRNG
+	public interface IPRNG
 	{
-		private readonly RandomNumberGenerator _rng2;
-
-		public static PRNG Instance { get; } = new PRNG();
-		private PRNG()
-		{
-			_rng2 = new RNGCryptoServiceProvider();
-		}
-
 		/// <summary>
 		/// Returns a non-negative random integer.
 		/// </summary>
-		public int Next()
-		{
-			var buf = new byte[sizeof(uint)];
-			_rng2.GetBytes(buf);
-			return (int)(BitConverter.ToUInt32(buf, 0) & 0x7FFFFFFFU);
-		}
+		int Next();
+
+		/// <summary>
+		/// Returns a random unsigned integer.
+		/// </summary>
+		uint NextU();
+
+		/// <summary>
+		/// Returns a non-negative random long integer.
+		/// </summary>
+		/// <returns></returns>
+		long NextL();
+
+		/// <summary>
+		/// Returns a random long unsigned integer.
+		/// </summary>
+		/// <returns></returns>
+		ulong NextUL();
 
 		/// <summary>
 		/// Returns a random integer that is within a specified range.
 		/// </summary>
-		public int Next(int inclusiveMin, int exclusiveMax) =>
-			inclusiveMin + (Next() % (exclusiveMax - inclusiveMin));
+		int Next(int inclusiveMin, int exclusiveMax);
 
 		/// <summary>
 		/// Returns a non-negative random integer that is less than the specified maximum.
 		/// </summary>
-		public int Next(int exclusiveMax) =>
-			Next() % exclusiveMax;
+		int Next(int exclusiveMax);
 
 		/// <summary>
 		/// Fills the elements of a specified array of bytes with random numbers.
 		/// </summary>
-		public void NextBytes(byte[] buffer) =>
-			_rng2.GetBytes(buffer);
+		byte[] NextBytes(byte[] buffer);
 
 		/// <summary>
 		/// Returns a string made of up random hexadecimal values in range of [0,255].
 		/// </summary>
+		string HexString(int count);
+	}
+
+	public sealed class PRNG : IPRNG
+	{
+		private readonly RandomNumberGenerator _prng;
+
+		public static IPRNG Instance { get; } = new PRNG();
+		private PRNG()
+		{
+			_prng = new RNGCryptoServiceProvider();
+		}
+
+		public int Next() =>
+			(int)(NextU() & 0x7FFFFFFFU);
+
+		public uint NextU() =>
+			BitConverter.ToUInt32(NextBytes(new byte[sizeof(uint)]), 0);
+
+		public long NextL() =>
+			(long)(NextUL() & 0x7FFFFFFFFFFFFFFFL);
+
+		public ulong NextUL() =>
+			BitConverter.ToUInt64(NextBytes(new byte[sizeof(ulong)]), 0);
+
+		public int Next(int inclusiveMin, int exclusiveMax) =>
+			inclusiveMin + (Next() % (exclusiveMax - inclusiveMin));
+
+		public int Next(int exclusiveMax) =>
+			Next() % exclusiveMax;
+
+		public byte[] NextBytes(byte[] buffer)
+		{
+			_prng.GetBytes(buffer);
+			return buffer;
+		}
+
 		public string HexString(int count) =>
 			string.Concat(Enumerable.Range(0, count).Select(x => $"{Convert.ToByte(Next(256)):x2}"));
 	}

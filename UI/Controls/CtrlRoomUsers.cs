@@ -16,7 +16,13 @@ namespace PaulasCadenza.UI.Controls
 			public HabboUserModel HabboUser { get; set; }
 		}
 
+		public sealed class RightClickEventArgs : EventArgs
+		{
+			public HabboUserModel HabboUser { get; set; }
+		}
+
 		public event EventHandler<DoubleClickEventArgs> DoubleClickList;
+		public event EventHandler<RightClickEventArgs> RightClickList;
 
 		public CtrlRoomUsers()
 		{
@@ -127,6 +133,30 @@ namespace PaulasCadenza.UI.Controls
 				{
 					HabboUser = LstRoomUsers.SelectedItem as HabboUserModel
 				});
+			}
+		}
+
+		private void LstRoomUsers_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			if ((e.Button == System.Windows.Forms.MouseButtons.Right) &&
+				(LstRoomUsers.SelectedIndex != -1))
+			{
+				RightClickList?.Invoke(this, new RightClickEventArgs
+				{
+					HabboUser = LstRoomUsers.SelectedItem as HabboUserModel
+				});
+			}
+		}
+
+		private void LstRoomUsers_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		{
+			if((e.KeyCode == System.Windows.Forms.Keys.Delete) ||
+				(e.KeyCode == System.Windows.Forms.Keys.Back))
+			{
+				e.SuppressKeyPress = true;
+				e.Handled = true;
+				CadenzaBots.Instance.ClearAllRoomUsers();
+				LstRoomUsers.Items.Clear();
 			}
 		}
 	}

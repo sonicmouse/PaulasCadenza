@@ -146,15 +146,29 @@ namespace PaulasCadenza.UI.Helpers
 				}
 			});
 
+			void Special(string txt)
+			{
+				CadenzaBots.Instance.WriteCommObjectAsync(new WCOSpecialCommand(txt), CadenzaBots.WriteType.Selected);
+			}
+
+			var menuSpecialCmds = new MenuItem("Special");
+			menuSpecialCmds.MenuItems.AddRange(new MenuItem[]
+			{
+				new MenuItem("Lightsaber", (s, e) => Special(":yyxxabxa")),
+				new MenuItem("Moon walk", (s, e) => Special(":moonwalk")),
+				new MenuItem("Hab Nam", (s, e) => Special(":habnam")),
+			});
+
 			return new ContextMenu(new MenuItem[]
 			{
 				menuDance,
 				menuActions,
 				menuSigns,
-				menuChatBubble,
-				menuDropItem,
+				menuSpecialCmds,
 				menuDizzy,
-				menuMotto
+				menuDropItem,
+				menuMotto,
+				menuChatBubble,
 			});
 		}
 	}

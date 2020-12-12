@@ -115,6 +115,7 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOHello.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOLookAt.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOMotto.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCORespect.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOShowSign.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOLeaveRoom.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCORequestRoomCategories.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="CommObjects\WriteCommObjects\WCOSearchRooms.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOShout.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOSit.cs" />
+    <Compile Include="CommObjects\WriteCommObjects\WCOSpecialCommand.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOTalk.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOTalkBubble.cs" />
     <Compile Include="CommObjects\WriteCommObjects\WCOTrackEventLog.cs" />
@@ -182,7 +184,7 @@
       <DependentUpon>FormMotto.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Helpers\ActionsContextMenu.cs" />
-    <Compile Include="UI\Helpers\PlatoonSgt.cs" />
+    <Compile Include="Data\PlatoonSgt.cs" />
     <Compile Include="UI\Pages\PageCtrlRoomActions.cs">
       <SubType>UserControl</SubType>
     </Compile>

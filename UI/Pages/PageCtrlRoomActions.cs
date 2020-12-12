@@ -21,9 +21,21 @@ namespace PaulasCadenza.UI.Pages
 
 			CtlFloor.TileClicked += OnTileClicked;
 			LstUsers.DoubleClickList += OnDoubleClickList;
+			LstUsers.RightClickList += OnRightClickList;
 
-			CmbWalkType.Items.AddRange(Helpers.PlatoonSgt.GetCadences().ToArray());
+			CmbWalkType.Items.AddRange(Data.PlatoonSgt.GetCadences().ToArray());
 			CmbWalkType.SelectedIndex = 0;
+		}
+
+		private void OnRightClickList(object sender, CtrlRoomUsers.RightClickEventArgs e)
+		{
+			if (MessageBox.Show(this,
+					$"Give respect to {e.HabboUser.Name}?", "Confirm",
+					MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+					MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+			{
+				CadenzaBots.Instance.WriteCommObjectAsync(new WCORespect(e.HabboUser.HabboId), CadenzaBots.WriteType.Selected);
+			}
 		}
 
 		private void OnDoubleClickList(object sender, CtrlRoomUsers.DoubleClickEventArgs e)
@@ -34,7 +46,7 @@ namespace PaulasCadenza.UI.Pages
 
 		private void OnTileClicked(object sender, CtrlFloor.TileClickedEventArgs e)
 		{
-			var sel = CmbWalkType.SelectedItem as Helpers.Cadence;
+			var sel = CmbWalkType.SelectedItem as Data.Cadence;
 			if(sel != null)
 			{
 				CadenzaBots.Instance.MoveToAsync(new Point(e.X, e.Y), sel.DeriveOffsets, CadenzaBots.WriteType.Selected);

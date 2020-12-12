@@ -41,7 +41,9 @@
 			this.LstRoomUsers.Name = "LstRoomUsers";
 			this.LstRoomUsers.Size = new System.Drawing.Size(101, 94);
 			this.LstRoomUsers.TabIndex = 0;
+			this.LstRoomUsers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LstRoomUsers_KeyDown);
 			this.LstRoomUsers.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LstRoomUsers_MouseDoubleClick);
+			this.LstRoomUsers.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LstRoomUsers_MouseUp);
 			// 
 			// CtrlRoomUsers
 			// 
