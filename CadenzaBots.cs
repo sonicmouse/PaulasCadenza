@@ -83,6 +83,14 @@ namespace PaulasCadenza
 			return _bots[acct].Bot.RoomUsers;
 		}
 
+		public void ClearAllRoomUsers()
+		{
+			foreach(var b in _bots)
+			{
+				b.Value.Bot.RoomUsers.RemoveAllUsers();
+			}
+		}
+
 		public enum WriteType
 		{
 			All,
@@ -189,12 +197,12 @@ namespace PaulasCadenza
 			}
 		}
 
-		public void MoveToAsync(Point ptStart, Func<int, IEnumerable<Point>> f, WriteType type)
+		public void MoveToAsync(Point ptStart, Func<int, IEnumerable<Point>> ptFactory, WriteType type)
 		{
 			var bots = GetBotSet(type);
 
 			var botCount = bots.Count();
-			var pts = f.Invoke(botCount).Take(botCount).ToArray();
+			var pts = ptFactory.Invoke(botCount).Take(botCount).ToArray();
 
 			var index = 0;
 			foreach (var b in bots)
@@ -234,9 +242,15 @@ namespace PaulasCadenza
 		{
 			System.Diagnostics.Debug.WriteLine($"-> RECEIVED OBJECT: {e.CommReadObject.GetType().Name}");
 
-			var bot = _bots[((Communication)sender).Tag as AccountModel].Bot;
+			var acct = ((Communication)sender).Tag as AccountModel;
+			if(acct == null || !_bots.ContainsKey(acct))
+			{
+				return;
+			}
 
-			NetworkCommPublisher.Interface.PublishCommReadObject(bot.Account, e.CommReadObject);
+			var bot = _bots[acct].Bot;
+
+			NetworkCommPublisher.Interface.PublishCommReadObject(acct, e.CommReadObject);
 
 			if (e.CommReadObject is RCOInitHandshake initHandshake)
 			{

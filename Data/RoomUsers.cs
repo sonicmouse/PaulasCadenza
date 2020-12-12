@@ -26,6 +26,11 @@ namespace PaulasCadenza.Data
 			}
 		}
 
+		public void RemoveAllUsers()
+		{
+			_users.Clear();
+		}
+
 		public void UpdateUsers(IEnumerable<RoomUserUpdateModel> users)
 		{
 			foreach(var u in users)

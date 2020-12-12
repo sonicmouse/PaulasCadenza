@@ -920,7 +920,7 @@ namespace PaulasCadenza.HabboDHM.Crypto
 		{
 			for(var i = 0; i < (Data?.Count).GetValueOrDefault(); ++i)
 			{
-				Data[i] = PRNG.Instance.Next();
+				Data[i] = PRNG.Instance.NextL();
 			}
 			Data.Clear();
 			ChunkCount = 0;
