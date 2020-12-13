@@ -36,6 +36,8 @@
 			this.TSMIAccounts = new System.Windows.Forms.ToolStripMenuItem();
 			this.TSMIAddAccount = new System.Windows.Forms.ToolStripMenuItem();
 			this.TSMIRemoveAccount = new System.Windows.Forms.ToolStripMenuItem();
+			this.TSMIHelp = new System.Windows.Forms.ToolStripMenuItem();
+			this.TSMIAbout = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStripMain = new System.Windows.Forms.StatusStrip();
 			this.TSStatusMain = new System.Windows.Forms.ToolStripStatusLabel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -51,6 +53,7 @@
 			this.TabCtrlMain = new System.Windows.Forms.TabControl();
 			this.TabPageRoomSearch = new System.Windows.Forms.TabPage();
 			this.TabPageRoomActions = new System.Windows.Forms.TabPage();
+			this.ToolTipMain = new System.Windows.Forms.ToolTip(this.components);
 			this.PageCtrlRoomSearch = new PaulasCadenza.UI.Pages.PageCtrlRoomSearch();
 			this.PageCtrlRoomActions = new PaulasCadenza.UI.Pages.PageCtrlRoomActions();
 			this.MenuStripMain.SuspendLayout();
@@ -70,7 +73,8 @@
 			// 
 			this.MenuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMIFile,
-            this.TSMIAccounts});
+            this.TSMIAccounts,
+            this.TSMIHelp});
 			this.MenuStripMain.Location = new System.Drawing.Point(0, 0);
 			this.MenuStripMain.Name = "MenuStripMain";
 			this.MenuStripMain.Size = new System.Drawing.Size(524, 24);
@@ -114,6 +118,21 @@
 			this.TSMIRemoveAccount.Size = new System.Drawing.Size(165, 22);
 			this.TSMIRemoveAccount.Text = "&Remove Account";
 			this.TSMIRemoveAccount.Click += new System.EventHandler(this.TSMIRemoveAccount_Click);
+			// 
+			// TSMIHelp
+			// 
+			this.TSMIHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMIAbout});
+			this.TSMIHelp.Name = "TSMIHelp";
+			this.TSMIHelp.Size = new System.Drawing.Size(44, 20);
+			this.TSMIHelp.Text = "&Help";
+			// 
+			// TSMIAbout
+			// 
+			this.TSMIAbout.Name = "TSMIAbout";
+			this.TSMIAbout.Size = new System.Drawing.Size(107, 22);
+			this.TSMIAbout.Text = "A&bout";
+			this.TSMIAbout.Click += new System.EventHandler(this.TSMIAbout_Click);
 			// 
 			// StatusStripMain
 			// 
@@ -163,7 +182,7 @@
 			this.tabControl2.Name = "tabControl2";
 			this.tabControl2.SelectedIndex = 0;
 			this.tabControl2.Size = new System.Drawing.Size(517, 175);
-			this.tabControl2.TabIndex = 4;
+			this.tabControl2.TabIndex = 0;
 			// 
 			// TabPageAccounts
 			// 
@@ -217,7 +236,7 @@
 			this.LstViewAccounts.MultiSelect = false;
 			this.LstViewAccounts.Name = "LstViewAccounts";
 			this.LstViewAccounts.ShowItemToolTips = true;
-			this.LstViewAccounts.Size = new System.Drawing.Size(461, 139);
+			this.LstViewAccounts.Size = new System.Drawing.Size(461, 143);
 			this.LstViewAccounts.SmallImageList = this.ImgListMain;
 			this.LstViewAccounts.TabIndex = 0;
 			this.LstViewAccounts.UseCompatibleStateImageBehavior = false;
@@ -254,8 +273,8 @@
 			this.TabCtrlMain.Location = new System.Drawing.Point(3, 3);
 			this.TabCtrlMain.Name = "TabCtrlMain";
 			this.TabCtrlMain.SelectedIndex = 0;
-			this.TabCtrlMain.Size = new System.Drawing.Size(517, 203);
-			this.TabCtrlMain.TabIndex = 4;
+			this.TabCtrlMain.Size = new System.Drawing.Size(517, 200);
+			this.TabCtrlMain.TabIndex = 0;
 			// 
 			// TabPageRoomSearch
 			// 
@@ -263,7 +282,7 @@
 			this.TabPageRoomSearch.Location = new System.Drawing.Point(4, 24);
 			this.TabPageRoomSearch.Name = "TabPageRoomSearch";
 			this.TabPageRoomSearch.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageRoomSearch.Size = new System.Drawing.Size(509, 175);
+			this.TabPageRoomSearch.Size = new System.Drawing.Size(509, 172);
 			this.TabPageRoomSearch.TabIndex = 0;
 			this.TabPageRoomSearch.Text = "Room Search";
 			this.TabPageRoomSearch.UseVisualStyleBackColor = true;
@@ -273,7 +292,7 @@
 			this.TabPageRoomActions.Controls.Add(this.PageCtrlRoomActions);
 			this.TabPageRoomActions.Location = new System.Drawing.Point(4, 24);
 			this.TabPageRoomActions.Name = "TabPageRoomActions";
-			this.TabPageRoomActions.Size = new System.Drawing.Size(509, 175);
+			this.TabPageRoomActions.Size = new System.Drawing.Size(509, 172);
 			this.TabPageRoomActions.TabIndex = 1;
 			this.TabPageRoomActions.Text = "Room Actions";
 			this.TabPageRoomActions.UseVisualStyleBackColor = true;
@@ -285,7 +304,7 @@
 			this.PageCtrlRoomSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomSearch.Location = new System.Drawing.Point(3, 3);
 			this.PageCtrlRoomSearch.Name = "PageCtrlRoomSearch";
-			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(503, 169);
+			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(503, 166);
 			this.PageCtrlRoomSearch.TabIndex = 0;
 			// 
 			// PageCtrlRoomActions
@@ -295,7 +314,7 @@
 			this.PageCtrlRoomActions.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomActions.Location = new System.Drawing.Point(0, 0);
 			this.PageCtrlRoomActions.Name = "PageCtrlRoomActions";
-			this.PageCtrlRoomActions.Size = new System.Drawing.Size(509, 177);
+			this.PageCtrlRoomActions.Size = new System.Drawing.Size(509, 174);
 			this.PageCtrlRoomActions.TabIndex = 0;
 			// 
 			// FormMain
@@ -356,6 +375,9 @@
 		private PaulasCadenza.UI.Pages.PageCtrlRoomSearch PageCtrlRoomSearch;
 		private System.Windows.Forms.TabPage TabPageRoomActions;
 		private PaulasCadenza.UI.Pages.PageCtrlRoomActions PageCtrlRoomActions;
+		private System.Windows.Forms.ToolStripMenuItem TSMIHelp;
+		private System.Windows.Forms.ToolStripMenuItem TSMIAbout;
+		private System.Windows.Forms.ToolTip ToolTipMain;
 	}
 }
 

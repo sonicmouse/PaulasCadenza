@@ -25,6 +25,11 @@ namespace PaulasCadenza.UI.Pages
 
 			CmbWalkType.Items.AddRange(Data.PlatoonSgt.GetCadences().ToArray());
 			CmbWalkType.SelectedIndex = 0;
+
+			ToolTipMain.SetToolTip(BtnRndHLAvatar, "Random \"Hot Look\"");
+			ToolTipMain.SetToolTip(BtnRndAvatar, "Random Avatar");
+			ToolTipMain.SetToolTip(ChkAvatarMale, "Male Gender");
+			ToolTipMain.SetToolTip(CmbWalkType, "Walk Cadence");
 		}
 
 		private void OnRightClickList(object sender, CtrlRoomUsers.RightClickEventArgs e)
@@ -59,6 +64,22 @@ namespace PaulasCadenza.UI.Pages
 			if(e.CommReadObject is RCOHeightMap heightMap)
 			{
 				Invoke(new Action(() => CtlFloor.HeightMap = heightMap));
+			}
+			else if(e.CommReadObject is RCOTalk talk)
+			{
+				Invoke(new Action(async () =>
+				{
+					if(ChkJoke.Checked)
+					{
+						try
+						{
+							var joke = await Data.DadJokes.GetAsync();
+							CadenzaBots.Instance.WriteCommObjectAsync(
+								new WCOTalk(joke), CadenzaBots.WriteType.Random);
+						}
+						catch { }
+					}
+				}));
 			}
 		}
 

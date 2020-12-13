@@ -28,10 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.CtlFloor = new PaulasCadenza.UI.Controls.CtrlFloor();
-			this.LstUsers = new PaulasCadenza.UI.Controls.CtrlRoomUsers();
+			this.CmbWalkType = new System.Windows.Forms.ComboBox();
 			this.BtnActions = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.ChkAvatarMale = new System.Windows.Forms.CheckBox();
@@ -41,7 +41,10 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.ChkShout = new System.Windows.Forms.CheckBox();
 			this.TxtTalk = new System.Windows.Forms.TextBox();
-			this.CmbWalkType = new System.Windows.Forms.ComboBox();
+			this.ChkJoke = new System.Windows.Forms.CheckBox();
+			this.CtlFloor = new PaulasCadenza.UI.Controls.CtrlFloor();
+			this.LstUsers = new PaulasCadenza.UI.Controls.CtrlRoomUsers();
+			this.ToolTipMain = new System.Windows.Forms.ToolTip(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
@@ -66,6 +69,7 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.ChkJoke);
 			this.splitContainer1.Panel2.Controls.Add(this.CmbWalkType);
 			this.splitContainer1.Panel2.Controls.Add(this.BtnActions);
 			this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
@@ -91,33 +95,19 @@
 			this.splitContainer2.SplitterDistance = 145;
 			this.splitContainer2.TabIndex = 0;
 			// 
-			// CtlFloor
+			// CmbWalkType
 			// 
-			this.CtlFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.CtlFloor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.CtlFloor.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.CtlFloor.HeightMap = null;
-			this.CtlFloor.Location = new System.Drawing.Point(3, 3);
-			this.CtlFloor.Name = "CtlFloor";
-			this.CtlFloor.Size = new System.Drawing.Size(139, 176);
-			this.CtlFloor.TabIndex = 0;
-			// 
-			// LstUsers
-			// 
-			this.LstUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.LstUsers.Font = new System.Drawing.Font("Segoe UI", 9F);
-			this.LstUsers.Location = new System.Drawing.Point(3, 3);
-			this.LstUsers.Name = "LstUsers";
-			this.LstUsers.Size = new System.Drawing.Size(138, 176);
-			this.LstUsers.TabIndex = 0;
+			this.CmbWalkType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.CmbWalkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.CmbWalkType.FormattingEnabled = true;
+			this.CmbWalkType.Location = new System.Drawing.Point(135, 120);
+			this.CmbWalkType.Name = "CmbWalkType";
+			this.CmbWalkType.Size = new System.Drawing.Size(92, 23);
+			this.CmbWalkType.TabIndex = 3;
 			// 
 			// BtnActions
 			// 
-			this.BtnActions.Location = new System.Drawing.Point(9, 120);
+			this.BtnActions.Location = new System.Drawing.Point(2, 120);
 			this.BtnActions.Name = "BtnActions";
 			this.BtnActions.Size = new System.Drawing.Size(75, 23);
 			this.BtnActions.TabIndex = 2;
@@ -219,15 +209,39 @@
 			this.TxtTalk.TabIndex = 0;
 			this.TxtTalk.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtTalk_KeyDown);
 			// 
-			// CmbWalkType
+			// ChkJoke
 			// 
-			this.CmbWalkType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.CmbWalkType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.CmbWalkType.FormattingEnabled = true;
-			this.CmbWalkType.Location = new System.Drawing.Point(135, 120);
-			this.CmbWalkType.Name = "CmbWalkType";
-			this.CmbWalkType.Size = new System.Drawing.Size(92, 23);
-			this.CmbWalkType.TabIndex = 3;
+			this.ChkJoke.AutoSize = true;
+			this.ChkJoke.Location = new System.Drawing.Point(3, 149);
+			this.ChkJoke.Name = "ChkJoke";
+			this.ChkJoke.Size = new System.Drawing.Size(53, 19);
+			this.ChkJoke.TabIndex = 4;
+			this.ChkJoke.Text = "/joke";
+			this.ChkJoke.UseVisualStyleBackColor = true;
+			// 
+			// CtlFloor
+			// 
+			this.CtlFloor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.CtlFloor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.CtlFloor.Font = new System.Drawing.Font("Segoe UI", 9F);
+			this.CtlFloor.HeightMap = null;
+			this.CtlFloor.Location = new System.Drawing.Point(3, 3);
+			this.CtlFloor.Name = "CtlFloor";
+			this.CtlFloor.Size = new System.Drawing.Size(139, 176);
+			this.CtlFloor.TabIndex = 0;
+			// 
+			// LstUsers
+			// 
+			this.LstUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.LstUsers.Font = new System.Drawing.Font("Segoe UI", 9F);
+			this.LstUsers.Location = new System.Drawing.Point(3, 3);
+			this.LstUsers.Name = "LstUsers";
+			this.LstUsers.Size = new System.Drawing.Size(138, 176);
+			this.LstUsers.TabIndex = 0;
 			// 
 			// PageCtrlRoomActions
 			// 
@@ -238,6 +252,7 @@
 			this.Size = new System.Drawing.Size(527, 182);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
+			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.splitContainer2.Panel1.ResumeLayout(false);
@@ -268,5 +283,7 @@
 		private Controls.CtrlFloor CtlFloor;
 		private Controls.CtrlRoomUsers LstUsers;
 		private System.Windows.Forms.ComboBox CmbWalkType;
+		private System.Windows.Forms.CheckBox ChkJoke;
+		private System.Windows.Forms.ToolTip ToolTipMain;
 	}
 }
