@@ -72,6 +72,10 @@ namespace PaulasCadenza.UI.Forms
 			}
 		}
 
+		/// <summary>
+		/// Since habbo data is protected from simple downloads, we are going to piggy back on the
+		/// established browser session to get at it.
+		/// </summary>
 		private static async Task<string> GetStringResourceFromUrlAsync(IFrame frm, Uri uri)
 		{
 			var script = (await Resources.GetResourceAsStringAsync(

@@ -70,6 +70,8 @@ namespace PaulasCadenza
 			}
 		}
 
+		public int ConnectedBotCount => _bots.Count;
+
 		public void SelectBot(AccountModel acct, bool selected = true)
 		{
 			if (_bots.ContainsKey(acct))

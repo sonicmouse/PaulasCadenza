@@ -21,6 +21,11 @@ namespace PaulasCadenza.UI.Forms
 			UpdateAccountList();
 			LstViewAccounts.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 			LstViewAccounts.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+			ToolTipMain.SetToolTip(BtnConnect, "Connect (or double-click list item)");
+			ToolTipMain.SetToolTip(BtnDisconnect, "Disconnect");
+
+			TabCtrlMain.Enabled = false;
 		}
 
 		private void SenderAsListViewItem(object sender, Action<ListViewItem> act)
@@ -39,11 +44,17 @@ namespace PaulasCadenza.UI.Forms
 
 		private void OnBotAuthenticated(object sender, EventArgs e)
 		{
+			Invoke(new Action(() => TabCtrlMain.Enabled = true));
 			SenderAsListViewItem(sender, i => i.ImageIndex = 0);
 		}
 
 		private void OnBotDisconnected(object sender, EventArgs e)
 		{
+			if(CadenzaBots.Instance.ConnectedBotCount == 0)
+			{
+				Invoke(new Action(() => TabCtrlMain.Enabled = false));
+			}
+
 			SenderAsListViewItem(sender, i =>
 			{
 				i.ImageIndex = 1;
@@ -160,6 +171,14 @@ namespace PaulasCadenza.UI.Forms
 			if ((itm != null) && (itm.Tag is AccountModel acct))
 			{
 				CadenzaBots.Instance.Disconnect(acct);
+			}
+		}
+
+		private void TSMIAbout_Click(object sender, EventArgs e)
+		{
+			using(var frm = new FormAbout())
+			{
+				frm.ShowDialog(this);
 			}
 		}
 	}

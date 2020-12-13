@@ -17,15 +17,22 @@ namespace PaulasCadenza.Data
 		{
 			var serializer = new XmlSerializer(typeof(FigureDataModel.FigureData));
 
-			using (var sr = new StringReader(xmlFigureData))
+			if(!string.IsNullOrEmpty(xmlFigureData))
 			{
-				_figureData = (FigureDataModel.FigureData)serializer.Deserialize(sr);
+				using (var sr = new StringReader(xmlFigureData))
+				{
+					_figureData = (FigureDataModel.FigureData)serializer.Deserialize(sr);
+				}
 			}
 
 			serializer = new XmlSerializer(typeof(FigureDataHotLooksModel.Habbos));
-			using (var sr = new StringReader(xmlFigureDataHotLooks))
+
+			if(!string.IsNullOrEmpty(xmlFigureDataHotLooks))
 			{
-				_figureDataHL = (FigureDataHotLooksModel.Habbos)serializer.Deserialize(sr);
+				using (var sr = new StringReader(xmlFigureDataHotLooks))
+				{
+					_figureDataHL = (FigureDataHotLooksModel.Habbos)serializer.Deserialize(sr);
+				}
 			}
 		}
 

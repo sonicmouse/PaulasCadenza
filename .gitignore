@@ -175,3 +175,4 @@ $RECYCLE.BIN/
 .DS_Store
 .vs
 
+/Resources/BuildDate.txt
