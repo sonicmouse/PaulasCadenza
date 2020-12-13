@@ -160,9 +160,11 @@ namespace PaulasCadenza
 			foreach(var bot in GetBotSet(type))
 			{
 				var roomEntity = bot.RoomUsers.GetAllUsers().FirstOrDefault(x => x.HabboId == bot.HabboId);
-
-				bot.Comm.WriteCommObjectsAsync(
-					new WCOLookAt(roomEntity.X + offsets[dir].Item1, roomEntity.Y + offsets[dir].Item2));
+				if(roomEntity != null)
+				{
+					bot.Comm.WriteCommObjectsAsync(
+						new WCOLookAt(roomEntity.X + offsets[dir].Item1, roomEntity.Y + offsets[dir].Item2));
+				}
 			}
 		}
 
