@@ -52,10 +52,10 @@
 			this.ImgListMain = new System.Windows.Forms.ImageList(this.components);
 			this.TabCtrlMain = new System.Windows.Forms.TabControl();
 			this.TabPageRoomSearch = new System.Windows.Forms.TabPage();
-			this.TabPageRoomActions = new System.Windows.Forms.TabPage();
-			this.ToolTipMain = new System.Windows.Forms.ToolTip(this.components);
 			this.PageCtrlRoomSearch = new PaulasCadenza.UI.Pages.PageCtrlRoomSearch();
+			this.TabPageRoomActions = new System.Windows.Forms.TabPage();
 			this.PageCtrlRoomActions = new PaulasCadenza.UI.Pages.PageCtrlRoomActions();
+			this.ToolTipMain = new System.Windows.Forms.ToolTip(this.components);
 			this.MenuStripMain.SuspendLayout();
 			this.StatusStripMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -236,7 +236,7 @@
 			this.LstViewAccounts.MultiSelect = false;
 			this.LstViewAccounts.Name = "LstViewAccounts";
 			this.LstViewAccounts.ShowItemToolTips = true;
-			this.LstViewAccounts.Size = new System.Drawing.Size(461, 143);
+			this.LstViewAccounts.Size = new System.Drawing.Size(461, 145);
 			this.LstViewAccounts.SmallImageList = this.ImgListMain;
 			this.LstViewAccounts.TabIndex = 0;
 			this.LstViewAccounts.UseCompatibleStateImageBehavior = false;
@@ -273,7 +273,7 @@
 			this.TabCtrlMain.Location = new System.Drawing.Point(3, 3);
 			this.TabCtrlMain.Name = "TabCtrlMain";
 			this.TabCtrlMain.SelectedIndex = 0;
-			this.TabCtrlMain.Size = new System.Drawing.Size(517, 200);
+			this.TabCtrlMain.Size = new System.Drawing.Size(517, 199);
 			this.TabCtrlMain.TabIndex = 0;
 			// 
 			// TabPageRoomSearch
@@ -282,20 +282,10 @@
 			this.TabPageRoomSearch.Location = new System.Drawing.Point(4, 24);
 			this.TabPageRoomSearch.Name = "TabPageRoomSearch";
 			this.TabPageRoomSearch.Padding = new System.Windows.Forms.Padding(3);
-			this.TabPageRoomSearch.Size = new System.Drawing.Size(509, 172);
+			this.TabPageRoomSearch.Size = new System.Drawing.Size(509, 171);
 			this.TabPageRoomSearch.TabIndex = 0;
 			this.TabPageRoomSearch.Text = "Room Search";
 			this.TabPageRoomSearch.UseVisualStyleBackColor = true;
-			// 
-			// TabPageRoomActions
-			// 
-			this.TabPageRoomActions.Controls.Add(this.PageCtrlRoomActions);
-			this.TabPageRoomActions.Location = new System.Drawing.Point(4, 24);
-			this.TabPageRoomActions.Name = "TabPageRoomActions";
-			this.TabPageRoomActions.Size = new System.Drawing.Size(509, 172);
-			this.TabPageRoomActions.TabIndex = 1;
-			this.TabPageRoomActions.Text = "Room Actions";
-			this.TabPageRoomActions.UseVisualStyleBackColor = true;
 			// 
 			// PageCtrlRoomSearch
 			// 
@@ -304,8 +294,18 @@
 			this.PageCtrlRoomSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomSearch.Location = new System.Drawing.Point(3, 3);
 			this.PageCtrlRoomSearch.Name = "PageCtrlRoomSearch";
-			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(503, 166);
+			this.PageCtrlRoomSearch.Size = new System.Drawing.Size(503, 165);
 			this.PageCtrlRoomSearch.TabIndex = 0;
+			// 
+			// TabPageRoomActions
+			// 
+			this.TabPageRoomActions.Controls.Add(this.PageCtrlRoomActions);
+			this.TabPageRoomActions.Location = new System.Drawing.Point(4, 24);
+			this.TabPageRoomActions.Name = "TabPageRoomActions";
+			this.TabPageRoomActions.Size = new System.Drawing.Size(509, 171);
+			this.TabPageRoomActions.TabIndex = 1;
+			this.TabPageRoomActions.Text = "Room Actions";
+			this.TabPageRoomActions.UseVisualStyleBackColor = true;
 			// 
 			// PageCtrlRoomActions
 			// 
@@ -314,7 +314,7 @@
 			this.PageCtrlRoomActions.Font = new System.Drawing.Font("Segoe UI", 9F);
 			this.PageCtrlRoomActions.Location = new System.Drawing.Point(0, 0);
 			this.PageCtrlRoomActions.Name = "PageCtrlRoomActions";
-			this.PageCtrlRoomActions.Size = new System.Drawing.Size(509, 174);
+			this.PageCtrlRoomActions.Size = new System.Drawing.Size(509, 171);
 			this.PageCtrlRoomActions.TabIndex = 0;
 			// 
 			// FormMain
@@ -325,6 +325,7 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.StatusStripMain);
 			this.Controls.Add(this.MenuStripMain);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.MenuStripMain;
 			this.MaximizeBox = false;
 			this.Name = "FormMain";
