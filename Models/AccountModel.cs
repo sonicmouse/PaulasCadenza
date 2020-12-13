@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using PaulasCadenza.Utilities;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace PaulasCadenza.Models
 {
@@ -23,11 +24,7 @@ namespace PaulasCadenza.Models
 			}
 			set
 			{
-				Entropy = new byte[32];
-				using (var rng = new RNGCryptoServiceProvider())
-				{
-					rng.GetBytes(Entropy);
-				}
+				Entropy = PRNG.Instance.NextBytes(new byte[32]);
 				Password = ProtectedData.Protect(
 					Encoding.UTF8.GetBytes(value),
 					Entropy, DataProtectionScope.CurrentUser);
